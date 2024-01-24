@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{js,jsx}',
+    'node_modules/flowbite-react/lib/esm/**/*.js',
+  ],
   mode: 'jit',
   theme: {
     extend: {
@@ -43,5 +47,5 @@ export default {
       'color-so-slow': 'color 6s ease-in-out infinite',
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };
