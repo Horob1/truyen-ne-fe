@@ -4,13 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
+import dfAvatar from '../../assets/dfAvaUser.jpg';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaEye } from 'react-icons/fa';
+import { FaEyeSlash } from 'react-icons/fa6';
 
 export const LogInPage = () => {
+  const [showPwd, setShowPwd] = useState(false);
   const [username, setUsername] = useState('');
   const [pwd, setPwd] = useState('');
-
   const navigate = useNavigate();
   const handleSubmitBtn = async () => {
     //validate
@@ -32,13 +35,10 @@ export const LogInPage = () => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        
       });
     }
 
     if (res) {
-      console.log(res);
-      // localStorage.setItem("avater", res.data);
       navigate('/');
     }
   };
@@ -84,6 +84,23 @@ export const LogInPage = () => {
               }}
               required
             />
+            <button
+              type="button"
+              className="absolute top-[20%] right-2 z-10 p-2"
+              onClick={() => {
+                setShowPwd(!showPwd);
+                if (showPwd)
+                  document
+                    .getElementById('floating_password')
+                    .setAttribute('type', 'password');
+                else
+                  document
+                    .getElementById('floating_password')
+                    .setAttribute('type', 'text');
+              }}
+            >
+              {!showPwd ? <FaEye /> : <FaEyeSlash />}
+            </button>
 
             <label
               htmlFor="floating_password"
