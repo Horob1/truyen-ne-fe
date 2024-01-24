@@ -1,10 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const LogInPage = () => {
+  const [username, setUsername] = useState('');
+  const [pwd, setPwd] = useState('');
+
+  const navigate = useNavigate();
+  const handleSubmitBtn = async () => {
+    //validate
+
+    //call api
+    const data = {};
+    data['username'] = username;
+    data['password'] = pwd;
+    let res;
+    try {
+      res = await axios.post('http://127.0.0.1:3000/auth/login', data);
+    } catch (error) {
+      toast.error('Incorrect username or password', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        
+      });
+    }
+
+    if (res) {
+      console.log(res);
+      // localStorage.setItem("avater", res.data);
+      navigate('/');
+    }
+  };
+
   return (
     <div className="flex bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  h-[100vh] bg-[length:300%_300%] animate-color-so-slow w-[100%]">
       <div className="m-auto bg-white rounded-2xl  drop-shadow-sm w-[98%] md:w-[460px] z-10">
@@ -12,36 +50,44 @@ export const LogInPage = () => {
           <h1 className="text-3xl font-bold text-center pt-8 pb-8">Login</h1>
         </div>
 
-        <form class="w-[80%] mx-auto">
-          <div class="relative z-0 w-full mb-5 group">
+        <form className="w-[80%] mx-auto" id="my-form">
+          <div className="relative z-0 w-full mb-6 group">
             <input
               type="text"
               name="floating_username"
               id="floating_username"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
+              value={username}
+              onChange={(event) => {
+                setUsername(event.target.value);
+              }}
               required
             />
             <label
-              for="floating_username"
-              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              htmlFor="floating_username"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Username
             </label>
           </div>
-          <div class="relative z-0 w-full mb-5 group">
+          <div className="relative z-0 w-full mb-5 group">
             <input
               type="password"
               name="floating_password"
               id="floating_password"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
+              value={pwd}
+              onChange={(event) => {
+                setPwd(event.target.value);
+              }}
               required
             />
 
             <label
-              for="floating_password"
-              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              htmlFor="floating_password"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Password
             </label>
@@ -53,8 +99,9 @@ export const LogInPage = () => {
           </div>
 
           <button
-            type="submit"
-            class="text-white w-[100%] rounded-4xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
+            type="button"
+            onClick={handleSubmitBtn}
+            className="text-white w-[100%] rounded-4xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
           >
             Submit
           </button>
@@ -86,6 +133,7 @@ export const LogInPage = () => {
           <img src={logo} alt="Logo" className="h-[50px]" />
         </Link>
       </div>
+      <ToastContainer />
     </div>
   );
 };
