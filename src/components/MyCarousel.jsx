@@ -1,11 +1,11 @@
 import React from 'react';
 import { Carousel } from 'flowbite-react';
-import test from './../../assets/test.webp';
+import test from './../assets/test.webp';
 
 export const MyCarousel = () => {
   const customTheme = {
     scrollContainer: {
-      base: 'flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-none',
+      base: 'flex h-full snap-mandatory overflow-y-hidden overflow-x-hiden scroll-smooth rounded-none',
       snap: 'snap-x',
     },
   };
@@ -18,6 +18,7 @@ export const MyCarousel = () => {
         <img src={test} alt="..." className="h-[100%] " />
         <img src={test} alt="..." className="h-[100%] " />
       </Carousel>
+      
     </div>
   );
 };

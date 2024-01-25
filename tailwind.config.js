@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        be: '#3322000d',
+        be: 'rgba(245, 244, 242, 1)',
         primary: '#00040f',
         secondary: '#00f6ff',
         dimWhite: 'rgba(255, 255, 255, 0.7)',
@@ -42,10 +42,15 @@ export default {
         '50%': { 'background-position': '50% 100%' },
         '100%': { 'background-position': '0 50%' },
       },
+      wiggle: {
+        '0%': { transform: 'rotate(0deg)' },
+        '100%': { transform: 'rotate(180deg)' },
+      },
     },
     animation: {
       'color-so-slow': 'color 6s ease-in-out infinite',
+      'spin-slow': 'wiggle 60s linear infinite',
     },
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [require('tailwindcss-animate'), require('flowbite/plugin')],
 };

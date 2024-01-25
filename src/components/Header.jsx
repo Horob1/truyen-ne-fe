@@ -7,13 +7,16 @@ import { LuMenuSquare } from 'react-icons/lu';
 import { IoMdClose } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
+
+
   const [toggle, setToggle] = useState(false);
   const handleToggleMenu = () => {
     setToggle(!toggle);
   };
+
   return (
-    <div className="w-screen h-[80px] z-10 bg-be sticky drop-shadow">
+    <div className="h-[80px] bg-be sticky drop-shadow z-50">
       <div className="flex justify-between items-center w-full h-full md:max-w-[1240px] m-auto">
         <Link to="/" className="pl-4">
           <img src={logo} alt="Logo" className="h-[50px]" />
@@ -55,7 +58,7 @@ const Header = () => {
         </div>
       </div>
       {toggle && (
-        <ul className="absolute bg-be px-8 w-full md:hidden pb-4">
+        <ul className="absolute bg-be px-8 w-full md:hidden pb-4 z-50">
           <div className="relative py-[12px]">
             <input
               type="text"

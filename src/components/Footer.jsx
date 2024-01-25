@@ -7,7 +7,7 @@ const Footer = () => {
   const footerBg = '/src/assets/footerbg.png';
   return (
     <div
-      className="absolute  bottom-0 w-[100%] bg-cover bg-center h-[120px]"
+      className=" w-[100%] bg-cover bg-center h-[120px] mt-8"
       style={{ backgroundImage: `url(${footerBg})` }}
     >
       <div className="flex flex-col">

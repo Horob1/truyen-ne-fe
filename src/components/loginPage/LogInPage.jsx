@@ -4,29 +4,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
-import dfAvatar from '../../assets/dfAvaUser.jpg';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaEye } from 'react-icons/fa';
-import { FaEyeSlash } from 'react-icons/fa6';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { logIn } from '../../services/apiServices';
 
 export const LogInPage = () => {
   const [showPwd, setShowPwd] = useState(false);
   const [username, setUsername] = useState('');
   const [pwd, setPwd] = useState('');
   const navigate = useNavigate();
-  const handleSubmitBtn = async () => {
+  const handleSubmitBtn = async (event) => {
+    event.preventDefault();
     //validate
 
-    //call api
-    const data = {};
-    data['username'] = username;
-    data['password'] = pwd;
+    // call api
     let res;
     try {
-      res = await axios.post('http://127.0.0.1:3000/auth/login', data);
+      res = await logIn(username, pwd);
     } catch (error) {
-      toast.error('Incorrect username or password', {
+      return toast.error(error.response.data, {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -38,9 +35,9 @@ export const LogInPage = () => {
       });
     }
 
-    if (res) {
-      navigate('/');
-    }
+    sessionStorage.setItem('accessToken', res.data.accessToken);
+    sessionStorage.setItem('refreshToken', res.data.refreshToken);
+    return navigate('/');
   };
 
   return (
@@ -50,7 +47,7 @@ export const LogInPage = () => {
           <h1 className="text-3xl font-bold text-center pt-8 pb-8">Login</h1>
         </div>
 
-        <form className="w-[80%] mx-auto" id="my-form">
+        <form className="w-[80%] mx-auto" id="my-form" onSubmit={handleSubmitBtn}>
           <div className="relative z-0 w-full mb-6 group">
             <input
               type="text"
@@ -116,8 +113,7 @@ export const LogInPage = () => {
           </div>
 
           <button
-            type="button"
-            onClick={handleSubmitBtn}
+            type="submit"
             className="text-white w-[100%] rounded-4xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
           >
             Submit
@@ -139,10 +135,10 @@ export const LogInPage = () => {
       </div>
 
       <div className="absolute h-[100vh] w-[100%] overflow-hidden">
-        <div className="absolute origin-center rotate-45 w-[500px] h-[500px] rounded-3xl left-[-300px] bg-white opacity-20"></div>
-        <div className="absolute origin-center rotate-45 w-[500px] h-[500px] rounded-3xl right-[-400px] top-[200px] bg-white opacity-20"></div>
-        <div className="absolute origin-center rotate-45 w-[700px] h-[500px] rounded-3xl bottom-[-350px] left-[500px] bg-white opacity-20"></div>
-        <div className="absolute origin-center rotate-6 w-[200px] h-[300px] rounded-3xl bottom-[500px] left-[600px] bg-white opacity-20"></div>
+        <div className="absolute animate-spin-slow origin-center rotate-45 w-[500px] h-[500px] rounded-3xl left-[-300px] bg-white opacity-20"></div>
+        <div className="absolute animate-spin-slow origin-center rotate-45 w-[500px] h-[500px] rounded-3xl right-[-400px] top-[200px] bg-white opacity-20"></div>
+        <div className="absolute animate-spin-slow origin-center rotate-45 w-[700px] h-[500px] rounded-3xl bottom-[-350px] left-[500px] bg-white opacity-20"></div>
+        <div className="absolute animate-spin-slow origin-center rotate-6 w-[200px] h-[300px] rounded-3xl bottom-[500px] left-[600px] bg-white opacity-20"></div>
       </div>
 
       <div className="absolute left-1 top-1 hidden md:flex">

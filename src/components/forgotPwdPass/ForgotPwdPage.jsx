@@ -39,10 +39,20 @@ export const ForgotPwdPage = () => {
       </div>
 
       <div className="absolute h-[100vh] w-[100%] overflow-hidden">
-        <div className="absolute origin-center rotate-45 w-[500px] h-[500px] rounded-full left-[-300px] bg-white opacity-20"></div>
-        <div className="absolute origin-center rotate-45 w-[500px] h-[500px] rounded-3xl right-[-400px] top-[200px] bg-white opacity-20"></div>
-        <div className="absolute origin-center rotate-45 w-[700px] h-[500px] rounded-3xl bottom-[-350px] left-[500px] bg-white opacity-20"></div>
-        <div className="absolute origin-center rotate-6 w-[300px] h-[300px] rounded-full bottom-[500px] left-[600px] bg-white opacity-20"></div>
+        <div
+          className="absolute animate-in zoom-in-50 repeat-infinite origin-center rotate-45 w-[500px] h-[500px] rounded-full left-[-300px] bg-white opacity-20"
+          style={{
+            animationDuration: '3s',
+          }}
+        ></div>
+        <div className="absolute animate-spin-slow origin-center rotate-45 w-[500px] h-[500px] rounded-3xl right-[-400px] top-[200px] bg-white opacity-20"></div>
+        <div className="absolute animate-spin-slow origin-center rotate-45 w-[700px] h-[500px] rounded-3xl bottom-[-350px] left-[500px] bg-white opacity-20"></div>
+        <div
+          className="absolute animate-in zoom-in-50 repeat-infinite origin-center rotate-6 w-[300px] h-[300px] rounded-full bottom-[500px] left-[600px] bg-white opacity-20"
+          style={{
+            animationDuration: '3s',
+          }}
+        ></div>
       </div>
 
       <div className="absolute left-1 top-1 hidden md:flex">
