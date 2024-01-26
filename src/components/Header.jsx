@@ -8,8 +8,6 @@ import { IoMdClose } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
 const Header = (props) => {
-
-
   const [toggle, setToggle] = useState(false);
   const handleToggleMenu = () => {
     setToggle(!toggle);
@@ -17,7 +15,7 @@ const Header = (props) => {
 
   return (
     <div className="h-[80px] bg-be sticky drop-shadow z-50">
-      <div className="flex justify-between items-center w-full h-full md:max-w-[1240px] m-auto">
+      <div className="flex justify-between items-center w-full h-full md:max-w-[1240px] m-auto ">
         <Link to="/" className="pl-4">
           <img src={logo} alt="Logo" className="h-[50px]" />
         </Link>

@@ -7,7 +7,7 @@ export const Card = () => {
       <div className="grid grid-cols-4 w-full border-b-2  ">
         <div>
           <a href="">
-            <img src={novel} alt="" className="w-[75px]-[100px] shadow-md" />
+            <img src={novel} alt="" className="w-[75px]-[100px] shadow-md hover:scale-110" />
           </a>
         </div>
         <div className="col-span-3 pl-4">
