@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
@@ -9,8 +9,9 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { logIn } from '../../services/apiServices';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
-
+import { useSelector } from 'react-redux';
 export const LogInPage = () => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [isLoading, setIsLoading] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
   const [username, setUsername] = useState('');
@@ -53,6 +54,9 @@ export const LogInPage = () => {
     dispatch(doLogin(res));
     return navigate('/');
   };
+  useEffect(() => {
+    if (isAuthenticated) return navigate('/');
+  });
 
   return (
     <div className="flex bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  h-[100vh] bg-[length:300%_300%] animate-color-so-slow w-[100%]">

@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { register } from '../../services/apiServices';
-
+import { useSelector } from 'react-redux';
 export const RegisterPage = () => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  useEffect(() => {
+    if (isAuthenticated) return navigate('/');
+  });
   const navigate = useNavigate();
   const validateEmail = (email) => {
     return String(email)

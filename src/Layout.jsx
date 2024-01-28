@@ -16,6 +16,10 @@ export const Layout = () => {
           <Route path="novels" />
           <Route path="novel" />
           <Route index element={<HomePage />} />
+          <Route path="profile" />
+          <Route path="change-password" />
+          <Route path="my-collection" />
+          <Route path="admin" />
         </Route>
         <Route path="log-in" element={<LogInPage />}></Route>
         <Route path="register" element={<RegisterPage />}></Route>

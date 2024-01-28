@@ -10,12 +10,28 @@ import { useSelector } from 'react-redux';
 import { IoIosLogOut } from 'react-icons/io';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineCollections } from 'react-icons/md';
-
+import { useDispatch } from 'react-redux';
+import { doLogout } from '../redux/action/userAction';
+import { toast } from 'react-toastify';
 const Header = (props) => {
   const [isShowUserMenu, setIsShowUserMenu] = useState(false);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
   const [toggle, setToggle] = useState(false);
+  const dispatch = useDispatch();
+  const handleLogOutBtn = () => {
+    dispatch(doLogout());
+    toast.info('Quay trở lại sớm nhé bạn yêu💕', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  };
   const handleToggleMenu = () => {
     setToggle(!toggle);
   };
@@ -92,12 +108,13 @@ const Header = (props) => {
                       </span>
                     </Link>
                   </li>
-                  <li className="pl-3 hover:bg-yellow-50 rounded-b-xl">
-                    <Link to="">
-                      <span className="flex items-center">
-                        <IoIosLogOut className="mr-2 "></IoIosLogOut> Đăng xuất
-                      </span>
-                    </Link>
+                  <li
+                    className="pl-3 hover:bg-yellow-50 rounded-b-xl"
+                    onClick={handleLogOutBtn}
+                  >
+                    <span className="flex items-center">
+                      <IoIosLogOut className="mr-2 "></IoIosLogOut> Đăng xuất
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -153,9 +170,12 @@ const Header = (props) => {
                 </Link>
               </li>
               <li>
-                <Link to="">
-                  <button className="btn btn-blue w-full">Đăng xuất</button>
-                </Link>
+                <button
+                  className="btn btn-blue w-full"
+                  onClick={handleLogOutBtn}
+                >
+                  Đăng xuất
+                </button>
               </li>
             </>
           )}
