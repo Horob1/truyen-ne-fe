@@ -6,11 +6,12 @@ import { Outlet } from 'react-router-dom';
 import { MyCarousel } from './components/MyCarousel';
 
 function App() {
+
   return (
     <>
       <Header></Header>
       <MyCarousel />
-      <Outlet ></Outlet>
+      <Outlet></Outlet>
       <Footer></Footer>
     </>
   );

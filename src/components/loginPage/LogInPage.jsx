@@ -1,28 +1,33 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { logIn } from '../../services/apiServices';
+import { useDispatch } from 'react-redux';
+import { doLogin } from '../../redux/action/userAction';
 
 export const LogInPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
   const [username, setUsername] = useState('');
   const [pwd, setPwd] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmitBtn = async (event) => {
     event.preventDefault();
     //validate
 
     // call api
+    setIsLoading(true);
     let res;
     try {
       res = await logIn(username, pwd);
     } catch (error) {
+      setIsLoading(false);
       return toast.error(error.response.data, {
         position: 'top-right',
         autoClose: 5000,
@@ -34,9 +39,18 @@ export const LogInPage = () => {
         theme: 'light',
       });
     }
-
-    sessionStorage.setItem('accessToken', res.data.accessToken);
-    sessionStorage.setItem('refreshToken', res.data.refreshToken);
+    toast.success(`Chào mừng ${username} đã quay trở lại 💕`, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+    setIsLoading(false);
+    dispatch(doLogin(res));
     return navigate('/');
   };
 
@@ -47,7 +61,11 @@ export const LogInPage = () => {
           <h1 className="text-3xl font-bold text-center pt-8 pb-8">Login</h1>
         </div>
 
-        <form className="w-[80%] mx-auto" id="my-form" onSubmit={handleSubmitBtn}>
+        <form
+          className="w-[80%] mx-auto"
+          id="my-form"
+          onSubmit={handleSubmitBtn}
+        >
           <div className="relative z-0 w-full mb-6 group">
             <input
               type="text"
@@ -113,6 +131,7 @@ export const LogInPage = () => {
           </div>
 
           <button
+            disabled={isLoading}
             type="submit"
             className="text-white w-[100%] rounded-4xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
           >
@@ -146,7 +165,6 @@ export const LogInPage = () => {
           <img src={logo} alt="Logo" className="h-[50px]" />
         </Link>
       </div>
-      <ToastContainer />
     </div>
   );
 };

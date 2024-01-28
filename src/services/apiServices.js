@@ -1,3 +1,4 @@
 import logIn from './api/logIn';
+import register from './api/register';
 
-export { logIn };
+export { logIn, register };

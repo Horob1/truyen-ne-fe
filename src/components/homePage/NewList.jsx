@@ -18,19 +18,19 @@ export const NewList = () => {
           <table className="table-fixed w-full text-left rtl:text-right text-base ">
             <tbody className="px-4">
               <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
+                <th className="hidden md:flex col-span-2">
                   <a href="">
                     <h5 className="font-light truncate">Huyền huyễn</h5>
                   </a>
                 </th>
-                <th className=" col-span-3">
+                <th className=" md:col-span-3 col-span-5">
                   <a href="">
                     <h5 className="truncate">
                       Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
                     </h5>
                   </a>
                 </th>
-                <th className="col-span-4">
+                <th className="md:col-span-4 col-span-5">
                   <a href="">
                     <h5 className="truncate font-light">
                       Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
@@ -38,252 +38,12 @@ export const NewList = () => {
                     </h5>
                   </a>
                 </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
+                <th className="col-span-2 hidden md:flex">
+                  <h5 className="truncate font-light ">
                     Hiệp 36 thiên cương tam thập lục biến
                   </h5>
                 </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
-                  <h5 className="font-light text-end">33 phút trước</h5>
-                </th>
-              </tr>
-              <tr className="w-full grid grid-cols-12 gap-6 py-2 hover:bg-be px-2">
-                <th className="col-span-1">
-                  <a href="">
-                    <h5 className="font-light truncate">Huyền huyễn</h5>
-                  </a>
-                </th>
-                <th className=" col-span-3">
-                  <a href="">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-4">
-                  <a href="">
-                    <h5 className="truncate font-light">
-                      Chương 1: Ta tái sinh thành dân thanh hóa! Hoa Thánh tái
-                      thế!
-                    </h5>
-                  </a>
-                </th>
-                <th className="col-span-2">
-                  <h5 className="truncate font-light">
-                    Hiệp 36 thiên cương tam thập lục biến
-                  </h5>
-                </th>
-                <th className="col-span-2   ">
+                <th className="md:col-span-1  col-span-2  ">
                   <h5 className="font-light text-end">33 phút trước</h5>
                 </th>
               </tr>

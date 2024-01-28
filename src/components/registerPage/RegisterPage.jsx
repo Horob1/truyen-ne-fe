@@ -1,8 +1,193 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { register } from '../../services/apiServices';
 
 export const RegisterPage = () => {
+  const navigate = useNavigate();
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  const validateUsername = (username) => {
+    return username.length >= 6 && /^[a-z0-9_\.]+$/.test(username);
+  };
+
+  const validatePassword = (pwString) => {
+    var strength = 0;
+
+    strength += /[A-Z]+/.test(pwString) ? 1 : 0;
+    strength += /[a-z]+/.test(pwString) ? 1 : 0;
+    strength += /[0-9]+/.test(pwString) ? 1 : 0;
+    strength += /[\W]+/.test(pwString) ? 1 : 0;
+
+    if (strength === 4) return true;
+    return false;
+  };
+
+  const handleUsername = (e) => {
+    const usernameInput = e.target;
+    const label = document.querySelector("[for='floating_username']");
+    if (!validateUsername(usernameInput.value)) {
+      usernameInput.classList.add('!text-red-600');
+      usernameInput.classList.add('!border-red-600');
+
+      label.classList.add('!text-red-600');
+    } else {
+      usernameInput.classList.remove('!text-red-600');
+      usernameInput.classList.remove('!border-red-600');
+
+      label.classList.remove('!text-red-600');
+    }
+
+    setUsername(usernameInput.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    const pwdInput = e.target;
+    const label = document.querySelector("[for='floating_password']");
+    if (!validatePassword(pwdInput.value)) {
+      pwdInput.classList.add('!text-red-600');
+      pwdInput.classList.add('!border-red-600');
+
+      label.classList.add('!text-red-600');
+    } else {
+      pwdInput.classList.remove('!text-red-600');
+      pwdInput.classList.remove('!border-red-600');
+
+      label.classList.remove('!text-red-600');
+    }
+
+    setPwd(pwdInput.value);
+    const pwdComfirmInput = document.getElementById(
+      'floating_comfirm_password'
+    );
+    const labelComfirm = document.querySelector(
+      "[for='floating_comfirm_password']"
+    );
+    if (pwdComfirmInput.value !== '') {
+      if (pwdComfirmInput.value !== pwdInput.value) {
+        pwdComfirmInput.classList.add('!text-red-600');
+        pwdComfirmInput.classList.add('!border-red-600');
+
+        labelComfirm.classList.add('!text-red-600');
+      } else {
+        pwdComfirmInput.classList.remove('!text-red-600');
+        pwdComfirmInput.classList.remove('!border-red-600');
+
+        labelComfirm.classList.remove('!text-red-600');
+      }
+    }
+  };
+  const handlePasswordComfirmChange = (e) => {
+    const pwdInput = e.target;
+    const label = document.querySelector("[for='floating_comfirm_password']");
+    if (document.getElementById('floating_password').value !== pwdInput.value) {
+      pwdInput.classList.add('!text-red-600');
+      pwdInput.classList.add('!border-red-600');
+
+      label.classList.add('!text-red-600');
+    } else {
+      pwdInput.classList.remove('!text-red-600');
+      pwdInput.classList.remove('!border-red-600');
+
+      label.classList.remove('!text-red-600');
+    }
+
+    setPwdComfirm(pwdInput.value);
+  };
+  const handleSubmitBtn = async (e) => {
+    e.preventDefault();
+    if (!validateUsername(username))
+      return toast.error('Your username is invalid', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    if (validateEmail(!email))
+      return toast.error('Your email is invalid', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+
+    if (!validatePassword(pwd))
+      return toast.error('Your password is so weak!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    if (pwd !== pwdComfirm)
+      return toast.error('Your comfirm password is not match!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+
+    let res;
+    try {
+      res = await register(
+        firstName,
+        lastName,
+        username,
+        email,
+        pwd,
+        pwdComfirm
+      );
+    } catch (error) {
+      let myError = 'Lỗi! Vui lòng thử lại sau';
+      if (error.response.data.keyValue.email)
+        myError = `${error.response.data.keyValue.email} đã tồn tại`;
+      else if (error.response.data.keyValue.username)
+        myError = `${error.response.data.keyValue.username} đã tồn tại`;
+
+      return toast.error(myError, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+    return navigate('/log-in');
+  };
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [pwdComfirm, setPwdComfirm] = useState('');
+  const [showPwd, setShowPwd] = useState(false);
+  const [showPwdComfirm, setShowPwdComfirm] = useState(false);
   return (
     <div>
       <div className="flex bg-gradient-to-r from-green-300 via-blue-500 to-purple-600  h-[100vh] bg-[length:300%_300%] animate-color-so-slow w-[100%]">
@@ -13,7 +198,7 @@ export const RegisterPage = () => {
             </h1>
           </div>
 
-          <form className="w-[80%] mx-auto">
+          <form className="w-[80%] mx-auto" onSubmit={handleSubmitBtn}>
             <div className="grid grid-cols-2 gap-4">
               <div className="relative z-0 w-full mb-5 group">
                 <input
@@ -23,6 +208,9 @@ export const RegisterPage = () => {
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  onChange={(e) => {
+                    setFirstName(e.target.value);
+                  }}
                 />
                 <label
                   htmlFor="floating_first_name"
@@ -39,6 +227,9 @@ export const RegisterPage = () => {
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
                 />
                 <label
                   htmlFor="floating_last_name"
@@ -56,6 +247,7 @@ export const RegisterPage = () => {
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 required
+                onChange={handleUsername}
               />
               <label
                 htmlFor="floating_username"
@@ -72,6 +264,9 @@ export const RegisterPage = () => {
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 required
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
               <label
                 htmlFor="floating_email"
@@ -88,8 +283,25 @@ export const RegisterPage = () => {
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 required
+                onChange={handlePasswordChange}
               />
-
+              <button
+                type="button"
+                className="absolute top-[20%] right-2 z-10 p-2"
+                onClick={() => {
+                  setShowPwd(!showPwd);
+                  if (showPwd)
+                    document
+                      .getElementById('floating_password')
+                      .setAttribute('type', 'password');
+                  else
+                    document
+                      .getElementById('floating_password')
+                      .setAttribute('type', 'text');
+                }}
+              >
+                {!showPwd ? <FaEye /> : <FaEyeSlash />}
+              </button>
               <label
                 htmlFor="floating_password"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -105,8 +317,25 @@ export const RegisterPage = () => {
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 required
+                onChange={handlePasswordComfirmChange}
               />
-
+              <button
+                type="button"
+                className="absolute top-[20%] right-2 z-10 p-2"
+                onClick={() => {
+                  setShowPwdComfirm(!showPwdComfirm);
+                  if (showPwdComfirm)
+                    document
+                      .getElementById('floating_comfirm_password')
+                      .setAttribute('type', 'password');
+                  else
+                    document
+                      .getElementById('floating_comfirm_password')
+                      .setAttribute('type', 'text');
+                }}
+              >
+                {!showPwdComfirm ? <FaEye /> : <FaEyeSlash />}
+              </button>
               <label
                 htmlFor="floating_comfirm_password"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
