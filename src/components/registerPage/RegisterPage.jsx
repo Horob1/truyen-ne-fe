@@ -109,7 +109,7 @@ export const RegisterPage = () => {
   const handleSubmitBtn = async (e) => {
     e.preventDefault();
     if (!validateUsername(username))
-      return toast.error('Your username is invalid', {
+      return toast.error('Tên đăng nhập không hợp lệ!', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -120,7 +120,7 @@ export const RegisterPage = () => {
         theme: 'light',
       });
     if (validateEmail(!email))
-      return toast.error('Your email is invalid', {
+      return toast.error('Email không hợp lệ!', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -132,7 +132,7 @@ export const RegisterPage = () => {
       });
 
     if (!validatePassword(pwd))
-      return toast.error('Your password is so weak!', {
+      return toast.error('Mật khẩu quá yếu!', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -143,7 +143,7 @@ export const RegisterPage = () => {
         theme: 'light',
       });
     if (pwd !== pwdComfirm)
-      return toast.error('Your comfirm password is not match!', {
+      return toast.error('Mật khẩu không trùng nhau!', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -198,7 +198,7 @@ export const RegisterPage = () => {
         <div className="m-auto bg-white rounded-2xl  drop-shadow-sm w-[98%] md:w-[460px] z-10">
           <div>
             <h1 className="text-3xl font-bold text-center pt-8 pb-8">
-              Sign Up
+              Đăng ký
             </h1>
           </div>
 
@@ -220,7 +220,7 @@ export const RegisterPage = () => {
                   htmlFor="floating_first_name"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                  First Name
+                  Họ
                 </label>
               </div>
               <div className="relative z-0 w-full mb-5 group">
@@ -239,7 +239,7 @@ export const RegisterPage = () => {
                   htmlFor="floating_last_name"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                  Last Name
+                  Tên
                 </label>
               </div>
             </div>
@@ -257,7 +257,7 @@ export const RegisterPage = () => {
                 htmlFor="floating_username"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Username
+                Tên đăng nhập
               </label>
             </div>
             <div className="relative z-0 w-full mb-5 group">
@@ -310,7 +310,7 @@ export const RegisterPage = () => {
                 htmlFor="floating_password"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Password
+                Mật khẩu
               </label>
             </div>
             <div className="relative z-0 w-full mb-5 group">
@@ -344,7 +344,7 @@ export const RegisterPage = () => {
                 htmlFor="floating_comfirm_password"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Password Comfirm
+                Nhập lại mật khẩu
               </label>
             </div>
 
@@ -352,11 +352,11 @@ export const RegisterPage = () => {
               type="submit"
               className="text-white mb-8 w-[100%] rounded-4xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
             >
-              Submit
+              Đăng ký
             </button>
             <Link to="/log-in">
               <h5 className="text-sm text-gray-700 hover:text-gray-900 text-center pb-8">
-                If you already had an account!
+                Nếu bạn đã có tài khoản!
               </h5>
             </Link>
           </form>

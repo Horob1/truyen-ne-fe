@@ -29,7 +29,7 @@ export const LogInPage = () => {
       res = await logIn(username, pwd);
     } catch (error) {
       setIsLoading(false);
-      return toast.error(error.response.data, {
+      return toast.error('💣 '+error.response.data, {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -62,7 +62,7 @@ export const LogInPage = () => {
     <div className="flex bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  h-[100vh] bg-[length:300%_300%] animate-color-so-slow w-[100%]">
       <div className="m-auto bg-white rounded-2xl  drop-shadow-sm w-[98%] md:w-[460px] z-10">
         <div>
-          <h1 className="text-3xl font-bold text-center pt-8 pb-8">Login</h1>
+          <h1 className="text-3xl font-bold text-center pt-8 pb-8">Đăng nhập</h1>
         </div>
 
         <form
@@ -87,7 +87,7 @@ export const LogInPage = () => {
               htmlFor="floating_username"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Username
+              Tên tài khoản
             </label>
           </div>
           <div className="relative z-0 w-full mb-5 group">
@@ -125,11 +125,11 @@ export const LogInPage = () => {
               htmlFor="floating_password"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Password
+              Mật khẩu
             </label>
             <Link to="/forgot-pwd">
               <h5 className="text-sm text-gray-400 hover:text-pink-700 text-end">
-                Forgot password?
+                Quên mật khẩu?
               </h5>
             </Link>
           </div>
@@ -139,12 +139,12 @@ export const LogInPage = () => {
             type="submit"
             className="text-white w-[100%] rounded-4xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
           >
-            Submit
+            Đăng nhập
           </button>
         </form>
 
         <h5 className="text-sm text-gray-500  text-center p-8">
-          Or Log-in Using
+          Hoặc đăng nhập bằng
         </h5>
         <div className="m-auto flex justify-center align-middle pb-[160px]">
           <FaFacebook className="text-blue-700 text-4xl mr-4"></FaFacebook>
@@ -152,7 +152,7 @@ export const LogInPage = () => {
         </div>
         <Link to="/register">
           <h5 className="text-sm text-gray-700 hover:text-gray-900 text-center pb-8">
-            Or Sign-up
+            Hoặc đăng ký
           </h5>
         </Link>
       </div>

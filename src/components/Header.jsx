@@ -93,7 +93,7 @@ const Header = (props) => {
               >
                 <ul className="text-gray-700">
                   <li className="pl-3 hover:bg-yellow-50 rounded-t-xl">
-                    <Link to="">
+                    <Link to="/user/profile">
                       <span className="flex items-center">
                         <CgProfile className="mr-2 text-gray-500"></CgProfile>{' '}
                         Hồ sơ
@@ -101,7 +101,7 @@ const Header = (props) => {
                     </Link>
                   </li>
                   <li className="pl-3 hover:bg-yellow-50 ">
-                    <Link to="">
+                    <Link to="/user/my-collection">
                       <span className="flex items-center">
                         <MdOutlineCollections className="mr-2 text-gray-500"></MdOutlineCollections>{' '}
                         Tủ truyện
@@ -160,12 +160,12 @@ const Header = (props) => {
           ) : (
             <>
               <li>
-                <Link to="">
+                <Link to="/user/profile">
                   <button className="btn btn-blue w-full">Hồ sơ</button>
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/user/profile">
                   <button className="btn btn-blue w-full">Tủ truyện</button>
                 </Link>
               </li>

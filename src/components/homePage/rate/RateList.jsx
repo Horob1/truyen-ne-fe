@@ -9,7 +9,7 @@ export const RateList = () => {
   const [isShowBtn, setIsShowBtn] = useState(false);
   return (
     <div
-      className="md:col-span-1 w-full bg-be rounded-xl shadow-xl"
+      className="md:col-span-1 w-full m-auto bg-be rounded-xl shadow-xl max-w-[400px]"
       onMouseOver={() => {
         setIsShowBtn(true);
       }}
