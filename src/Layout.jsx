@@ -10,6 +10,8 @@ import { UserPage } from './components/userPage/UserPage.jsx';
 import { Profile } from './components/userPage/Profile.jsx';
 import { Collections } from './components/userPage/Collections.jsx';
 import { ChangePwdForm } from './components/userPage/ChangePwdForm.jsx';
+import { InforPage } from './components/inforPage/InforPage.jsx';
+import { ReadingPage } from './components/readingPage/ReadingPage.jsx';
 
 export const Layout = () => {
   return (
@@ -26,7 +28,8 @@ export const Layout = () => {
         <Route path="up-load"></Route>
         <Route path="admin"></Route>
 
-        <Route path="novel/:nSlug"></Route>
+        <Route path="novel/:nSlug" element={<InforPage />}></Route>
+        <Route path="novel/:nSlug/:cSlug" element={<ReadingPage />}></Route>
 
         <Route path="log-in" element={<LogInPage />}></Route>
         <Route path="register" element={<RegisterPage />}></Route>
