@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pagination } from '../Pagination';
+import { MyPagination } from '../MyPagination';
 import novel from './../../assets/novel.jpg';
 import { FaTrash, FaTruckMonster } from 'react-icons/fa';
 export const Collections = () => {
@@ -134,7 +134,7 @@ export const Collections = () => {
           </div>
         </div>
       </div>
-      <Pagination />
+      <MyPagination />
     </div>
   );
 };
