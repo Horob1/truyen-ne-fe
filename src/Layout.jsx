@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import App from './App.jsx';
 import { Route, Routes } from 'react-router-dom';
@@ -10,6 +11,8 @@ import { UserPage } from './components/userPage/UserPage.jsx';
 import { Profile } from './components/userPage/Profile.jsx';
 import { Collections } from './components/userPage/Collections.jsx';
 import { ChangePwdForm } from './components/userPage/ChangePwdForm.jsx';
+import { SearchPage } from './components/searchPage/SearchPage.jsx';
+import { AuthorPage } from './components/authorPage/AuthorPage.jsx';
 import { InforPage } from './components/inforPage/InforPage.jsx';
 import { ReadingPage } from './components/readingPage/ReadingPage.jsx';
 import { AdminPage } from './components/adminPage/AdminPage.jsx';
@@ -28,19 +31,21 @@ import { UpdateNovel } from './components/upLoadPage/UpdateNovel.jsx';
 import { ChapterList } from './components/upLoadPage/ChapterList.jsx';
 import { UpdateChapter } from './components/upLoadPage/chapter/UpdateChapter.jsx';
 import { AddChapter } from './components/upLoadPage/chapter/AddChapter.jsx';
-
 export const Layout = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
+          <Route path="novel/search" element={<SearchPage />} />
           <Route path="user" element={<UserPage />}>
             <Route path="profile" element={<Profile />} />
             <Route path="change-password" element={<ChangePwdForm />} />
             <Route path="my-collection" element={<Collections />} />
           </Route>
         </Route>
+
+        <Route path="author/:aSlug" element={<AuthorPage />} />
         <Route path="up-load" element={<UploadPage />}>
           <Route index element={<UploadRule />}></Route>
           <Route path="new-novel" element={<AddNovel />}></Route>
@@ -68,7 +73,6 @@ export const Layout = () => {
           <Route path="author/add-new" element={<AddAuthor />}></Route>
           <Route path="search/:uId" element={<UpdateUser />}></Route>
         </Route>
-
         <Route path="novel/:nSlug" element={<InforPage />}></Route>
         <Route path="novel/:nSlug/:cSlug" element={<ReadingPage />}></Route>
 
