@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{js,jsx}',
@@ -9,7 +10,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        xam: '#f8f8f8',
         be: 'rgba(245, 244, 242, 1)',
+        read: 'rgba(234, 228, 211,1)',
         primary: '#00040f',
         secondary: '#00f6ff',
         dimWhite: 'rgba(255, 255, 255, 0.7)',
@@ -17,6 +20,7 @@ export default {
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
+        patrick: ['Patrick Hand'],
       },
     },
     screens: {
@@ -46,10 +50,15 @@ export default {
         '0%': { transform: 'rotate(0deg)' },
         '100%': { transform: 'rotate(180deg)' },
       },
+      moveX: {
+        '0%': {},
+        '100%': { transform: 'translateX(0.6rem)' },
+      },
     },
     animation: {
       'color-so-slow': 'color 6s ease-in-out infinite',
       'spin-slow': 'wiggle 60s linear infinite',
+      'move-to-right': 'moveX 0.5s forwards',
     },
   },
   plugins: [require('tailwindcss-animate'), require('flowbite/plugin')],

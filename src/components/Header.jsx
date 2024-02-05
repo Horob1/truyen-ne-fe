@@ -17,6 +17,7 @@ const Header = (props) => {
   const [isShowUserMenu, setIsShowUserMenu] = useState(false);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
+  console.log(account.avatar);
   const [toggle, setToggle] = useState(false);
   const dispatch = useDispatch();
   const handleLogOutBtn = () => {
@@ -77,7 +78,11 @@ const Header = (props) => {
                 onClick={(e) => setIsShowUserMenu(!isShowUserMenu)}
               >
                 <img
-                  src="/src/assets/dfAvaUser.jpg"
+                  src={
+                    account.avatar
+                      ? account.avatar
+                      : '/src/assets/dfAvaUser.jpg'
+                  }
                   className="h-8 w-8 rounded-full"
                   alt="avatar"
                 />
