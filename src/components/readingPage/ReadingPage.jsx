@@ -23,28 +23,32 @@ export const ReadingPage = () => {
   return (
     <div>
       <Header></Header>
-      <div className="w-full flex bg-be text-black dark:text-white dark:bg-black ">
+      <div className="w-full flex bg-be text-black dark:text-white dark:bg-black">
         <div className="relative m-auto bg-read dark:bg-gray-700 rounded-xl  md:max-w-[1080px]  max-w-[98%] w-full my-6 md:p-12 p-4">
           <div className="hidden md:flex absolute right-[-10px] top-0">
             <ul className="fixed ">
-              <li className="block py-4 px-8 bg-read dark:bg-gray-700  border-b-2 border-gray-300 rounded-t-xl">
-                <MdArrowBack className="text-2xl" />
+              <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 rounded-t-xl">
+                <div className="py-4 px-8">
+                  <MdArrowBack className="text-2xl" />
+                </div>
               </li>
               <li
-                className={`relative block py-4 px-8 border-b-2 border-gray-300 ${
+                className={`relative block  border-b-2 border-gray-300 ${
                   isShowSetting
                     ? 'bg-white dark:bg-gray-400'
                     : 'bg-read dark:bg-gray-700 '
                 }`}
               >
-                <IoSettingsOutline
+                <div
+                  className="py-4 px-8"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     setIsShowSetting(!isShowSetting);
                   }}
-                  className="text-2xl "
-                />
+                >
+                  <IoSettingsOutline className="text-2xl " />
+                </div>
                 <div
                   className={`absolute bg-white dark:bg-gray-400 right-full top-0 w-[500px] ${
                     isShowSetting ? '' : 'hidden'
@@ -70,11 +74,15 @@ export const ReadingPage = () => {
                   </div>
                 </div>
               </li>
-              <li className="block py-4 px-8 bg-read dark:bg-gray-700  border-b-2 border-gray-300 ">
-                <FaRegBookmark className="text-2xl" />
+              <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 ">
+                <div className="py-4 px-8">
+                  <FaRegBookmark className="text-2xl" />
+                </div>
               </li>
-              <li className="block py-4 px-8 bg-read dark:bg-gray-700  border-gray-300 rounded-b-xl">
-                <IoChatboxEllipsesOutline className="text-2xl" />
+              <li className="block  bg-read dark:bg-gray-700  border-gray-300 rounded-b-xl">
+                <div className=" py-4 px-8">
+                  <IoChatboxEllipsesOutline className="text-2xl" />
+                </div>
               </li>
             </ul>
           </div>

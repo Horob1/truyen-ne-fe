@@ -9,7 +9,7 @@ export const FontCombobox = () => {
 
   return (
     <Listbox value={selectedFont} onChange={setSelectedFont}>
-      <Listbox.Button>{selectedFont}</Listbox.Button>
+      <Listbox.Button className="w-full">{selectedFont}</Listbox.Button>
       <Listbox.Options className="absolute top-[60%] bg-be dark:bg-gray-700 w-[55%] p-4 rounded-lg border-2 border-gray-600 dark:border-white">
         {font.map((font, index) => (
           /* Use the `active` state to conditionally style the active option. */

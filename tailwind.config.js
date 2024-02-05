@@ -10,6 +10,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        xam: '#f8f8f8',
         be: 'rgba(245, 244, 242, 1)',
         read: 'rgba(234, 228, 211,1)',
         primary: '#00040f',
@@ -49,10 +50,15 @@ export default {
         '0%': { transform: 'rotate(0deg)' },
         '100%': { transform: 'rotate(180deg)' },
       },
+      moveX: {
+        '0%': {},
+        '100%': { transform: 'translateX(0.6rem)' },
+      },
     },
     animation: {
       'color-so-slow': 'color 6s ease-in-out infinite',
       'spin-slow': 'wiggle 60s linear infinite',
+      'move-to-right': 'moveX 0.5s forwards',
     },
   },
   plugins: [require('tailwindcss-animate'), require('flowbite/plugin')],
