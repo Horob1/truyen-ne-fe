@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import App from './App.jsx';
 import { Route, Routes } from 'react-router-dom';
@@ -10,13 +11,15 @@ import { UserPage } from './components/userPage/UserPage.jsx';
 import { Profile } from './components/userPage/Profile.jsx';
 import { Collections } from './components/userPage/Collections.jsx';
 import { ChangePwdForm } from './components/userPage/ChangePwdForm.jsx';
-
+import { SearchPage } from './components/searchPage/SearchPage.jsx';
+import { AuthorPage } from './components/authorPage/AuthorPage.jsx';
 export const Layout = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
+          <Route path="novel/search" element={<SearchPage />} />
           <Route path="user" element={<UserPage />}>
             <Route path="profile" element={<Profile />} />
             <Route path="change-password" element={<ChangePwdForm />} />
@@ -25,6 +28,7 @@ export const Layout = () => {
         </Route>
         <Route path="up-load"></Route>
         <Route path="admin"></Route>
+        <Route path="author/:aSlug" element={<AuthorPage />} />
 
         <Route path="novel/:nSlug"></Route>
 
