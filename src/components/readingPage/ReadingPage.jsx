@@ -59,8 +59,6 @@ export const ReadingPage = () => {
           setChapter(res?.data?.chapter[0]);
           if (res?.data?.chapter[0]?.content) {
             setIsLoading(false);
-            document.getElementById('content').innerHTML =
-              res?.data?.chapter[0]?.content;
             if (novelResponse?.data?.novels[0]) {
               const bookmarkResponse = await getMarkBook(
                 novelResponse.data.novels[0].id
@@ -237,16 +235,17 @@ export const ReadingPage = () => {
               </span>
             </div>
             <div
-              className={`pt-6 
-              ${size === 'sm' ? 'leading-7 font-normal' : ''}  
-              ${size === 'base' ? 'leading-9 font-normal' : ''} 
-              ${size === 'xl' ? 'leading-9 font-normal' : ''}
-              ${size === '3xl' ? 'font-light' : ''}
-              ${size === '4xl' ? 'font-light' : ''}
-
-              text-${size}  font-${font}`}
+              className={`pt-6 ${
+                size === 'sm' ? 'leading-7 font-normal' : ''
+              } ${size === 'base' ? 'leading-9 font-normal' : ''} ${
+                size === 'xl' ? 'leading-9 font-normal' : ''
+              } ${size === '3xl' ? 'font-light' : ''} ${
+                size === '4xl' ? 'font-light' : ''
+              } text-${size}`}
             >
-              <article id="content" className="pb-32"></article>
+              <article id="content" className={`pb-32 font-${font}`}>
+                {chapter?.content}
+              </article>
               =========
             </div>
             <div className="pt-8 md:pt-16 grid grid-cols-1 md:grid-cols-2">

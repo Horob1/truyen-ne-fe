@@ -42,8 +42,8 @@ export const InforPage = () => {
         }
         if (novelResponse?.data?.novels[0]?.name)
           document.title = novelResponse?.data?.novels[0]?.name;
-        setIsLoading(false);
       } catch (error) {}
+      setIsLoading(false);
     };
 
     fetchData();

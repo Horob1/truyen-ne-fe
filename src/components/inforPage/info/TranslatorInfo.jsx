@@ -15,12 +15,11 @@ export const TranslatorInfo = (props) => {
             `?translator=${props?.translator?.id}`
           );
           setList(response?.data?.novels || []);
-          setIsLoading(false);
         } catch (error) {
-          setIsLoading(false);
           setList([]);
         }
       }
+      setIsLoading(false);
     };
 
     fetchData();

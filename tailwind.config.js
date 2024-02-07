@@ -8,6 +8,14 @@ export default {
   ],
   mode: 'jit',
   theme: {
+    fontFamily: {
+      sans: ['ui-sans-serif', 'system-ui'],
+      diphy: ['diphy', 'sans'],
+      patrick: ['patrick', 'serif'],
+      playfair: ['playfair', 'serif'],
+      protes: ['protes', 'serif'],
+      roboto: ['roboto', 'serif'],
+    },
     extend: {
       colors: {
         xam: '#f8f8f8',
@@ -17,10 +25,6 @@ export default {
         secondary: '#00f6ff',
         dimWhite: 'rgba(255, 255, 255, 0.7)',
         dimBlue: 'rgba(9, 151, 124, 0.1)',
-      },
-      fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        patrick: ['Patrick Hand'],
       },
     },
     screens: {

@@ -33,7 +33,7 @@ export const Comment = (props) => {
   return (
     <>
       <article
-        className={`mt-6  p-6 text-base bg-white rounded-lg dark:bg-gray-900`}
+        className={`mt-6 p-6 text-base bg-white rounded-lg dark:bg-gray-900`}
       >
         {/* Article Footer */}
         <footer className="flex justify-between items-center mb-2">

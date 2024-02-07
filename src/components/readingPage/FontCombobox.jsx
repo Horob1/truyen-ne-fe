@@ -3,7 +3,7 @@ import { Listbox } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFontSetting } from '../../redux/action/readingAction';
 
-const font = ['sans', 'serif', 'mono', 'poppins', 'patrick'];
+const font = ['diphy', 'patrick', 'playfair', 'sans', 'protes', 'roboto'];
 
 export const FontCombobox = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,11 @@ export const FontCombobox = () => {
           /* Use the `selected` state to conditionally style the selected option. */
           <Listbox.Option key={index} value={font} as={Fragment}>
             {({ active, selected }) => (
-              <li className={`${active ? ' text-yellow-500' : ''}`}>{font}</li>
+              <li
+                className={`font-${font} ${active ? ' text-yellow-500' : ''}`}
+              >
+                {font}
+              </li>
             )}
           </Listbox.Option>
         ))}
