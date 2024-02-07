@@ -5,7 +5,7 @@ import { CiSearch } from 'react-icons/ci';
 import { ImUpload2 } from 'react-icons/im';
 import { LuMenuSquare } from 'react-icons/lu';
 import { IoMdClose } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IoIosLogOut } from 'react-icons/io';
 import { CgProfile } from 'react-icons/cg';
@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { doLogout } from '../redux/action/userAction';
 import { toast } from 'react-toastify';
 const Header = () => {
+  const [search, setSearch] = useState('');
   const [isShowUserMenu, setIsShowUserMenu] = useState(false);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
@@ -35,6 +36,11 @@ const Header = () => {
   const handleToggleMenu = () => {
     setToggle(!toggle);
   };
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/novel/search?search=${search}'`);
+  };
 
   return (
     <div className="h-[80px] bg-be sticky drop-shadow z-50">
@@ -44,16 +50,20 @@ const Header = () => {
         </Link>
 
         <div className="relative hidden pl-[18rem]  md:flex">
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Tìm kiếm"
-            className="px-8 py-2 rounded-md w-[320px]"
-          />
-          <button className="absolute top-[12px] right-[16px]">
-            <CiSearch />
-          </button>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="search"
+              id="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Tìm kiếm"
+              className="px-8 py-2 rounded-md w-[320px]"
+            />
+            <button type="submit" className="absolute top-[12px] right-[16px]">
+              <CiSearch />
+            </button>
+          </form>
         </div>
         <ul className="hidden md:flex flex-row">
           <li className="pr-10 hover:text-green-500">

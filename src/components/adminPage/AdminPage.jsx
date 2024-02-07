@@ -9,6 +9,7 @@ export const AdminPage = () => {
   const role = useSelector((state) => state.user.account.role);
   const navigate = useNavigate();
   useEffect(() => {
+    document.title = 'Admin';
     if (screen.width < 1280) {
       navigate('/');
     }

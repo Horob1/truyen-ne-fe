@@ -35,11 +35,11 @@ export const Card = (props) => {
                   props.info?.translator?.lastName}
             </h5>
             <Link
-              to={`novel/search?category=${props.info?.categories[0]?.id}`}
-              className="text-[10px] h-6 pl-2 pr-2 absolute bottom-0 right-0 border-[1px] border-orange-700 text-orange-700"
+              to={`novel/search?category=${props.info?.categories?.id}`}
+              className=" flex items-center text-[10px] h-6 pl-2 pr-2 absolute bottom-0 right-0 border-[1px] border-orange-700 text-orange-700"
             >
-              {props.info?.categories[0]?.name
-                ? props.infor.categories[0].name
+              {props.info?.categories?.name
+                ? props.info?.categories?.name
                 : 'Chưa rõ'}
             </Link>
           </div>

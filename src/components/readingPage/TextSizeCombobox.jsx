@@ -17,14 +17,20 @@ export const TextSizeCombobox = () => {
   }, [selectedTextSize]);
   return (
     <Listbox value={selectedTextSize} onChange={setSelectedTextSize}>
-      <Listbox.Button className="w-full">{selectedTextSize}</Listbox.Button>
+      <Listbox.Button>
+        <span className={`text-${selectedTextSize}`}>{selectedTextSize}</span>
+      </Listbox.Button>
       <Listbox.Options className=" absolute top-[90%] bg-be dark:bg-gray-700 w-[55%] p-4 rounded-lg border-2 border-gray-600 dark:border-white">
         {textSize.map((textSize, index) => (
           /* Use the `active` state to conditionally style the active option. */
           /* Use the `selected` state to conditionally style the selected option. */
           <Listbox.Option key={index} value={textSize} as={Fragment}>
             {({ active, selected }) => (
-              <li className={`${active ? ' text-yellow-500' : ''}`}>
+              <li
+                className={`cursor-pointer text-${textSize} ${
+                  active ? ' text-yellow-500' : ''
+                }`}
+              >
                 {textSize}
               </li>
             )}

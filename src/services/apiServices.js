@@ -20,8 +20,11 @@ import getCommentList from './api/getCommentList';
 import createComment from './api/createComment';
 import deleteComment from './api/deleteComment';
 import updateComment from './api/updateComment';
+import getAuthor from './api/getAuthor';
+import getCategories from './api/getCategories';
 
 export {
+  getAuthor,
   deleteComment,
   createComment,
   getCommentList,
@@ -44,4 +47,5 @@ export {
   createReview,
   getReviewList,
   updateComment,
+  getCategories,
 };

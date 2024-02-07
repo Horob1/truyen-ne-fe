@@ -11,7 +11,6 @@ export const NewList = () => {
         const response = await getNewChapterList('?limit=10&sort=-createTime');
         setChapterList(response?.data?.chapter || []);
       } catch (error) {
-
         setChapterList([]); // Xử lý lỗi bằng cách đặt chapterList là một mảng rỗng
       }
     };
@@ -42,11 +41,11 @@ export const NewList = () => {
                 >
                   <th className="hidden md:flex col-span-2">
                     <Link
-                      to={`/novel/search?category=${el?.novel?.categories[0]?.id}`}
+                      to={`/novel/search?category=${el?.novel?.categories?.id}`}
                     >
                       <h5 className="font-light truncate">
-                        {el?.novel?.categories[0]?.name
-                          ? el?.novel?.categories[0]?.name
+                        {el?.novel?.categories?.name
+                          ? el?.novel?.categories?.name
                           : 'Chưa rõ'}
                       </h5>
                     </Link>

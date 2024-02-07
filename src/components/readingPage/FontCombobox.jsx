@@ -3,7 +3,7 @@ import { Listbox } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFontSetting } from '../../redux/action/readingAction';
 
-const font = ['diphy', 'patrick', 'playfair', 'sans', 'protes', 'roboto'];
+const font = ['patrick', 'playfair', 'sans', 'mono', 'protes', 'roboto'];
 
 export const FontCombobox = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,9 @@ export const FontCombobox = () => {
   }, [selectedFont]);
   return (
     <Listbox value={selectedFont} onChange={setSelectedFont}>
-      <Listbox.Button className="w-full">{selectedFont}</Listbox.Button>
+      <Listbox.Button>
+        <span className={`w-full font-${selectedFont}`}>{selectedFont}</span>
+      </Listbox.Button>
       <Listbox.Options className="absolute top-[60%] bg-be dark:bg-gray-700 w-[55%] p-4 rounded-lg border-2 border-gray-600 dark:border-white">
         {font.map((font, index) => (
           /* Use the `active` state to conditionally style the active option. */
@@ -25,7 +27,7 @@ export const FontCombobox = () => {
           <Listbox.Option key={index} value={font} as={Fragment}>
             {({ active, selected }) => (
               <li
-                className={`font-${font} ${active ? ' text-yellow-500' : ''}`}
+                className={`cursor-pointer font-${font} ${active ? ' text-yellow-500' : ''}`}
               >
                 {font}
               </li>

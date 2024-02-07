@@ -89,16 +89,19 @@ export const InforPage = () => {
               </h2>
               <div className="hidden sm:flex py-4">
                 {novel?.author?.name && (
-                  <button className="py-1 px-2 rounded-3xl border-[1px] border-red-500 text-red-500 mr-2">
-                    novel?.author?.name
-                  </button>
+                  <Link to={`/author/${novel?.author?.id}`}>
+                    <button className="py-1 px-2 rounded-3xl border-[1px] border-red-500 text-red-500 mr-2">
+                      {novel.author.name}
+                    </button>
+                  </Link>
                 )}
+
                 <button className="py-1 px-2 rounded-3xl border-[1px] border-green-500 text-green-500 mr-2">
                   {novel?.status}
                 </button>
                 <button className="py-1 px-2 rounded-3xl border-[1px] border-yellow-500 text-yellow-500 mr-2">
-                  {novel?.categories?.[0]?.name
-                    ? novel?.categories[0]
+                  {novel?.categories?.name
+                    ? novel?.categories?.name
                     : 'Chưa biết'}
                 </button>
               </div>

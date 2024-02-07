@@ -59,6 +59,13 @@ export const ReadingPage = () => {
           setChapter(res?.data?.chapter[0]);
           if (res?.data?.chapter[0]?.content) {
             setIsLoading(false);
+            document.title =
+              'Chương ' +
+              res?.data?.chapter[0]?.number +
+              ' ' +
+              res?.data?.chapter[0]?.name;
+            document.getElementById('content').innerHTML =
+              res?.data?.chapter[0]?.content.replace(/<\/p>/g, '</p><br>');
             if (novelResponse?.data?.novels[0]) {
               const bookmarkResponse = await getMarkBook(
                 novelResponse.data.novels[0].id
@@ -236,7 +243,7 @@ export const ReadingPage = () => {
             </div>
             <div
               className={`pt-6 ${
-                size === 'sm' ? 'leading-7 font-normal' : ''
+                size === 'sm' ? 'leading-7 font-normal ' : ''
               } ${size === 'base' ? 'leading-9 font-normal' : ''} ${
                 size === 'xl' ? 'leading-9 font-normal' : ''
               } ${size === '3xl' ? 'font-light' : ''} ${
@@ -244,9 +251,16 @@ export const ReadingPage = () => {
               } text-${size}`}
             >
               <article id="content" className={`pb-32 font-${font}`}>
-                {chapter?.content}
+                <div className="hidden">
+                  <span className="font-sans">C</span>
+                  <span className="font-patrick">H</span>
+                  <span className="font-playfair">A</span>
+                  <span className="font-protes">T</span>
+                  <span className="font-roboto">E</span>
+                  <span className="font-mono">R</span>
+                </div>
               </article>
-              =========
+              ===============
             </div>
             <div className="pt-8 md:pt-16 grid grid-cols-1 md:grid-cols-2">
               <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>

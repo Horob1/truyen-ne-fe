@@ -9,12 +9,13 @@ export default {
   mode: 'jit',
   theme: {
     fontFamily: {
-      sans: ['ui-sans-serif', 'system-ui'],
-      diphy: ['diphy', 'sans'],
-      patrick: ['patrick', 'serif'],
-      playfair: ['playfair', 'serif'],
-      protes: ['protes', 'serif'],
-      roboto: ['roboto', 'serif'],
+      'sans': ['ui-sans-serif', 'system-ui'],
+      'patrick': ['patrick', 'serif'],
+      'playfair': ['playfair', 'serif'],
+      'protes': ['protes', 'serif'],
+      'roboto': ['roboto', 'serif'],
+      'serif': ['ui-serif', 'Georgia', ],
+      'mono': ['ui-monospace', 'SFMono-Regular',],
     },
     extend: {
       colors: {

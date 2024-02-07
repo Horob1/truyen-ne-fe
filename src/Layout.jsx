@@ -46,7 +46,7 @@ export const Layout = () => {
           </Route>
         </Route>
 
-        <Route path="author/:aSlug" element={<AuthorPage />} />
+        <Route path="author/:aId" element={<AuthorPage />} />
         <Route path="up-load" element={<UploadPage />}>
           <Route index element={<UploadRule />}></Route>
           <Route path="new-novel" element={<AddNovel />}></Route>
@@ -80,7 +80,7 @@ export const Layout = () => {
         <Route path="log-in" element={<LogInPage />}></Route>
         <Route path="register" element={<RegisterPage />}></Route>
         <Route path="forgot-pwd" element={<ForgotPwdPage />}></Route>
-        <Route path="*" element={<NotFound/>}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <ToastContainer />
     </>

@@ -72,8 +72,8 @@ export const RateList = (props) => {
                   </span>
                   <span className="flex items-center text-gray-500 truncate">
                     <FiBook className="mr-2" />{' '}
-                    {el?.categories[0]?.name
-                      ? el?.categories[0]?.name
+                    {el?.categories?.name
+                      ? el?.categories?.name
                       : 'Chưa rõ'}
                   </span>
                 </div>

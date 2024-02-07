@@ -1,32 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  @font-face {
+    font-family: 'patrick';
+    src: url('/fonts/PatrickHand-Regular.ttf');
+  }
 
-@font-face {
-  font-family: 'diphy';
-  src: url('/src/font/Diphylleia-Regular.ttf');
+  @font-face {
+    font-family: 'playfair';
+    src: url('/fonts/PlayfairDisplay.ttf');
+  }
+
+  @font-face {
+    font-family: 'protes';
+    src: url('/fonts/Protest.ttf');
+  }
+
+  @font-face {
+    font-family: 'roboto';
+    src: url('/fonts/RobotoMono.ttf');
+  }
 }
-
-@font-face {
-  font-family: 'patrick';
-  src: url('/src/font/PatrickHand-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'playfair';
-  src: url('/src/font/PlayfairDisplay-VariableFont_wght.ttf');
-}
-
-@font-face {
-  font-family: 'protes';
-  src: url('/src/font/ProtestRevolution-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'roboto';
-  src: url('/src/font/RobotoMono-VariableFont_wght.ttf');
-}
-
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
