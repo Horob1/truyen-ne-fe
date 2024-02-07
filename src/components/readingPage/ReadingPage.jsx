@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
@@ -11,27 +11,101 @@ import { MdArrowBack } from 'react-icons/md';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { FaRegBookmark } from 'react-icons/fa';
 import { IoChatboxEllipsesOutline } from 'react-icons/io5';
-
+import { NotFound } from '../404Page/NotFound';
 import CommentList from './CommentList';
-import { ToggleSwitch } from 'flowbite-react';
+import { Spinner, ToggleSwitch } from 'flowbite-react';
 import { FontCombobox } from './FontCombobox';
 import { TextSizeCombobox } from './TextSizeCombobox';
+import { Link, useParams } from 'react-router-dom';
+import {
+  getMarkBook,
+  getNewChapterList,
+  getNovel,
+  toggleBookMark,
+} from '../../services/apiServices';
+import { FaBookmark } from 'react-icons/fa';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeThemeSetting } from '../../redux/action/readingAction';
 
 export const ReadingPage = () => {
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.readingSetting.theme);
+  const font = useSelector((state) => state.readingSetting.font);
+  const size = useSelector((state) => state.readingSetting.size);
+  const slug = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [bookMark, setBookMark] = useState({});
+  const [novel, setNovel] = useState({});
+  const [chapter, setChapter] = useState({});
   const [isShowSetting, setIsShowSetting] = useState(false);
   const [switch1, setSwitch1] = useState(false);
+  const toggleBookMarkBtn = async () => {
+    try {
+      const res = await toggleBookMark(novel?.id, !bookMark?.isLove);
+      setBookMark(res?.data?.collection);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const novelResponse = await getNovel(`?slug=${slug.nSlug}`);
+        setNovel(novelResponse?.data?.novels[0]);
+        if (novelResponse?.data?.novels[0]) {
+          const res = await getNewChapterList(
+            `?novel=${novelResponse?.data?.novels[0]?.id}&slug=${slug.cSlug}`
+          );
+
+          setChapter(res?.data?.chapter[0]);
+          if (res?.data?.chapter[0]?.content) {
+            setIsLoading(false);
+            document.getElementById('content').innerHTML =
+              res?.data?.chapter[0]?.content;
+            if (novelResponse?.data?.novels[0]) {
+              const bookmarkResponse = await getMarkBook(
+                novelResponse.data.novels[0].id
+              );
+              setBookMark(bookmarkResponse?.data?.collection);
+              await toggleBookMark(
+                novelResponse.data.novels[0].id,
+                bookmarkResponse?.data?.collection?.isLove,
+                res?.data?.chapter[0]?.id
+              );
+            }
+          }
+        }
+      } catch (error) {}
+    };
+    fetchData();
+    if (theme === 'dark') setSwitch1(true);
+  }, [slug]);
+  if (!chapter) return <NotFound />;
+  if (isLoading)
+    return (
+      <div className="w-full h-screen flex">
+        <div className="m-auto">
+          <Spinner
+            className="animate-spin-in "
+            aria-label="spinner example"
+            size="lg"
+          />
+        </div>
+      </div>
+    );
   return (
-    <div>
+    <div className={theme}>
       <Header></Header>
       <div className="w-full flex bg-be text-black dark:text-white dark:bg-black">
         <div className="relative m-auto bg-read dark:bg-gray-700 rounded-xl  md:max-w-[1080px]  max-w-[98%] w-full my-6 md:p-12 p-4">
           <div className="hidden md:flex absolute right-[-10px] top-0">
             <ul className="fixed ">
-              <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 rounded-t-xl">
-                <div className="py-4 px-8">
-                  <MdArrowBack className="text-2xl" />
-                </div>
-              </li>
+              <Link to={`/novel/${novel?.slug}`}>
+                <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 rounded-t-xl">
+                  <div className="py-4 px-8">
+                    <MdArrowBack className="text-2xl" />
+                  </div>
+                </li>
+              </Link>
               <li
                 className={`relative block  border-b-2 border-gray-300 ${
                   isShowSetting
@@ -60,7 +134,14 @@ export const ReadingPage = () => {
                       className="col-span-2"
                       checked={switch1}
                       label={!switch1 ? 'Light Mode' : 'Dark Mode'}
-                      onChange={setSwitch1}
+                      onChange={() => {
+                        setSwitch1(!switch1);
+                        dispatch(
+                          changeThemeSetting({
+                            theme: !switch1 ? 'dark' : 'light',
+                          })
+                        );
+                      }}
                     />
 
                     <span className="col-span-1">Font Chữ:</span>
@@ -76,116 +157,120 @@ export const ReadingPage = () => {
               </li>
               <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 ">
                 <div className="py-4 px-8">
-                  <FaRegBookmark className="text-2xl" />
+                  <button onClick={toggleBookMarkBtn}>
+                    {bookMark?.isLove ? (
+                      <FaBookmark className="text-2xl text-red-500 dark:text-red-700"></FaBookmark>
+                    ) : (
+                      <FaRegBookmark className="text-2xl" />
+                    )}
+                  </button>
                 </div>
               </li>
               <li className="block  bg-read dark:bg-gray-700  border-gray-300 rounded-b-xl">
-                <div className=" py-4 px-8">
-                  <IoChatboxEllipsesOutline className="text-2xl" />
-                </div>
+                <a href="#comment">
+                  <div className=" py-4 px-8">
+                    <IoChatboxEllipsesOutline className="text-2xl" />
+                  </div>
+                </a>
               </li>
             </ul>
           </div>
           <div className="hidden md:flex justify-between px-4">
-            <button className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50">
-              <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
-                <FaLongArrowAltLeft className="mr-2" />
-                <span> Chương Trước</span>
-              </div>
-            </button>
-            <button className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50">
-              <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
-                Chương Sau
-                <FaLongArrowAltRight className="ml-2" />
-              </div>
-            </button>
+            <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>
+              <button
+                disabled={chapter.number === 1}
+                className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50"
+              >
+                <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
+                  <FaLongArrowAltLeft className="mr-2" />
+                  <span> Chương Trước</span>
+                </div>
+              </button>
+            </Link>
+            <Link to={`/novel/${novel.slug}/chuong-${chapter.number + 1}`}>
+              <button
+                disabled={novel.progress === chapter.number}
+                className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50"
+              >
+                <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
+                  Chương Sau
+                  <FaLongArrowAltRight className="ml-2" />
+                </div>
+              </button>
+            </Link>
           </div>
           <div className="md:pt-12">
             <h1 className="md:text-3xl text-xl ">
-              Chương 1: Tôi là phú nhị đại đến từ Nam Định, mục tiêu phịch hết
-              gái Hà Nội và NTR anh em ba sáu
+              {`Chương ${chapter.number || '...'}: ${chapter.name || '...'}`}
             </h1>
 
             <div className="md:flex hidden pt-6 ">
               <div className="flex items-center">
                 <FiBook className="mr-1" />{' '}
-                <span className="text-base">Tên tôi là thế anh</span>
+                <span className="text-base">{novel.name || '...'}</span>
               </div>
               <div className="flex items-center ml-6">
                 <FaPenToSquare className="mr-1" />{' '}
-                <span className="text-base">Nguyễn Thế Anh</span>
+                <span className="text-base">
+                  {chapter?.translator?.firstName
+                    ? chapter?.translator?.firstName +
+                      ' ' +
+                      chapter?.translator?.lastName
+                    : 'Dịch giả'}
+                </span>
               </div>
               <div className="flex items-center ml-6">
-                <TbTextSize className="mr-1" />{' '}
-                <span className="text-base">2024 Chữ</span>
+                <TbTextSize className="mr-1" />
+                <span className="text-base">
+                  {chapter?.content?.toString().length || 0}
+                </span>
               </div>
               <div className="flex items-center ml-6">
                 <FaRegHeart className="mr-1" />{' '}
-                <span className="text-base">250</span>
+                <span className="text-base">{chapter?.watch || 0}</span>
               </div>
             </div>
             <div className="flex items-center mt-1">
               <FaRegClock className="mr-1" />{' '}
-              <span className="text-base">2023-08-01 21:05:20</span>
+              <span className="text-base">
+                {moment(new Date(chapter?.createTime)).format('YYYY-MM-DD')}
+              </span>
             </div>
-            <div className="pt-6 leading-7 text-xl font-light">
-              <article>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Provident, doloremque? Debitis cupiditate dolorum incidunt
-                dicta! Blanditiis ducimus quibusdam, maxime similique voluptate
-                molestias reprehenderit rerum delectus tenetur, aperiam commodi
-                ea ipsam.
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-                recusandae saepe. Recusandae quaerat fugiat laudantium eum, quo
-                rem minima et, officiis inventore voluptas voluptates, illum
-                sunt ullam accusamus expedita soluta!
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-                recusandae saepe. Recusandae quaerat fugiat laudantium eum, quo
-                rem minima et, officiis inventore voluptas voluptates, illum
-                sunt ullam accusamus expedita soluta!
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-                recusandae saepe. Recusandae quaerat fugiat laudantium eum, quo
-                rem minima et, officiis inventore voluptas voluptates, illum
-                sunt ullam accusamus expedita soluta!
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-                recusandae saepe. Recusandae quaerat fugiat laudantium eum, quo
-                rem minima et, officiis inventore voluptas voluptates, illum
-                sunt ullam accusamus expedita soluta!
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-                recusandae saepe. Recusandae quaerat fugiat laudantium eum, quo
-                rem minima et, officiis inventore voluptas voluptates, illum
-                sunt ullam accusamus expedita soluta!
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-                recusandae saepe. Recusandae quaerat fugiat laudantium eum, quo
-                rem minima et, officiis inventore voluptas voluptates, illum
-                sunt ullam accusamus expedita soluta!
-              </article>
+            <div
+              className={`pt-6 
+              ${size === 'sm' ? 'leading-7 font-normal' : ''}  
+              ${size === 'base' ? 'leading-9 font-normal' : ''} 
+              ${size === 'xl' ? 'leading-9 font-normal' : ''}
+              ${size === '3xl' ? 'font-light' : ''}
+              ${size === '4xl' ? 'font-light' : ''}
+
+              text-${size}  font-${font}`}
+            >
+              <article id="content" className="pb-32"></article>
               =========
             </div>
             <div className="pt-8 md:pt-16 grid grid-cols-1 md:grid-cols-2">
-              <button className="flex text-xl py-4 justify-center items-center border-[1px] border-gray-300">
-                <FaLongArrowAltLeft className="mr-2" />
-                <span> Chương Trước</span>
-              </button>
-              <button className="flex text-xl py-4 justify-center items-center border-[1px] border-gray-300">
-                <span> Chương Sau</span>
-                <FaLongArrowAltRight className="ml-2" />
-              </button>
+              <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>
+                <button
+                  disabled={chapter.number === 1}
+                  className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                >
+                  <FaLongArrowAltLeft className="mr-2" />
+                  <span> Chương Trước</span>
+                </button>
+              </Link>
+              <Link to={`/novel/${novel.slug}/chuong-${chapter.number + 1}`}>
+                <button
+                  disabled={novel.progress === chapter.number}
+                  className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                >
+                  <span> Chương Sau</span>
+                  <FaLongArrowAltRight className="ml-2" />
+                </button>
+              </Link>
             </div>
-            <div className="mt-8">
-              <CommentList />
+            <div className="mt-8" id="comment">
+              <CommentList chapter={chapter.id} />
             </div>
           </div>
         </div>

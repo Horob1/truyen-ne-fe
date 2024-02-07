@@ -10,6 +10,7 @@ import { logIn } from '../../services/apiServices';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
 import { useSelector } from 'react-redux';
+import { Spinner } from 'flowbite-react';
 export const LogInPage = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,16 +21,12 @@ export const LogInPage = () => {
   const dispatch = useDispatch();
   const handleSubmitBtn = async (event) => {
     event.preventDefault();
-    //validate
-
-    // call api
-    setIsLoading(true);
     let res;
     try {
       res = await logIn(username, pwd);
     } catch (error) {
       setIsLoading(false);
-      return toast.error('💣 '+error.response.data, {
+      return toast.error('💣 ' + error.response.data, {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -50,28 +47,34 @@ export const LogInPage = () => {
       progress: undefined,
       theme: 'light',
     });
-    setIsLoading(false);
     dispatch(doLogin(res));
     return navigate('/');
   };
   useEffect(() => {
+    document.title = 'Đăng nhập';
     if (isAuthenticated) return navigate('/');
-  });
+  }, []);
 
   return (
     <div className="flex bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  h-[100vh] bg-[length:300%_300%] animate-color-so-slow w-[100%]">
       <div className="m-auto bg-white rounded-2xl  drop-shadow-sm w-[98%] md:w-[460px] z-10">
         <div>
-          <h1 className="text-3xl font-bold text-center pt-8 pb-8">Đăng nhập</h1>
+          <h1 className="text-3xl font-bold text-center pt-8 pb-8">
+            Đăng nhập
+          </h1>
         </div>
 
         <form
           className="w-[80%] mx-auto"
           id="my-form"
-          onSubmit={handleSubmitBtn}
+          onSubmit={(e) => {
+            setIsLoading(true);
+            handleSubmitBtn(e);
+          }}
         >
           <div className="relative z-0 w-full mb-6 group">
             <input
+              disabled={isLoading}
               type="text"
               name="floating_username"
               id="floating_username"
@@ -92,6 +95,7 @@ export const LogInPage = () => {
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <input
+              disabled={isLoading}
               type="password"
               name="floating_password"
               id="floating_password"
@@ -104,6 +108,7 @@ export const LogInPage = () => {
               required
             />
             <button
+              disabled={isLoading}
               type="button"
               className="absolute top-[20%] right-2 z-10 p-2"
               onClick={() => {
@@ -139,6 +144,12 @@ export const LogInPage = () => {
             type="submit"
             className="text-white w-[100%] rounded-4xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
           >
+            <Spinner
+              hidden={!isLoading}
+              className="animate-spin-in mr-4"
+              aria-label="spinner example"
+              size="md"
+            />
             Đăng nhập
           </button>
         </form>

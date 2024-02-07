@@ -7,16 +7,21 @@ import { Link } from 'react-router-dom';
 
 export const HistoryList = () => {
   const [historyList, setHistoryList] = useState([]);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   useEffect(() => {
-    if (isAuthenticated)
-      getCollection('?limit=5')
-        .then((res) => {
-          setHistoryList(res.data.collection);
-        })
-        .catch(() => {
-          setHistoryList([]);
-        });
-  }, []);
+    const fetchHistoryList = async () => {
+      try {
+        if (isAuthenticated) {
+          const response = await getCollection('?limit=5');
+          setHistoryList(response?.data?.collection || []);
+        }
+      } catch (error) {
+        setHistoryList([]); // Xử lý lỗi bằng cách đặt historyList là một mảng rỗng
+      }
+    };
+
+    fetchHistoryList();
+  }, [isAuthenticated]);
   const handleDeleteBtn = (id) => {
     deleteCollection(id)
       .then(() => {
@@ -24,7 +29,6 @@ export const HistoryList = () => {
       })
       .catch(() => {});
   };
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   return (
     <div className="p-8 w-full ">
       <div className="flex justify-between items-center	 text-xl pb-8 ">

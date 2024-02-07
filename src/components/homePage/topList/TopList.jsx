@@ -5,14 +5,19 @@ import { getTopList } from '../../../services/apiServices.js';
 export const TopList = () => {
   const [topList, setTopList] = useState([]);
   useEffect(() => {
-    getTopList('?sort=-watch&limit=6')
-      .then((res) => {
-        setTopList(res.data.novels);
-      })
-      .catch((err) => {
-        setTopList([]);
-      });
+    const fetchTopList = async () => {
+      try {
+        const response = await getTopList('?sort=-watch&limit=6');
+        setTopList(response?.data?.novels || []);
+      } catch (error) {
+
+        setTopList([]); // Xử lý lỗi bằng cách đặt topList là một mảng rỗng
+      }
+    };
+  
+    fetchTopList();
   }, []);
+  
   return (
     <div className="md:col-span-2">
       <h2 className="text-start font-bold text-xl p-8 pb-0">Truyện đề cử</h2>

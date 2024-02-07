@@ -41,6 +41,14 @@ export default {
       '5xl': '3.052rem',
     },
     keyframes: {
+      spin: {
+        '0%': {
+          transform: 'rotate(0deg)',
+        },
+        '100%': {
+          transform: 'rotate(360deg)',
+        },
+      },
       color: {
         '0%': { 'background-position': '0 50%' },
         '50%': { 'background-position': '50% 100%' },
@@ -59,6 +67,7 @@ export default {
       'color-so-slow': 'color 6s ease-in-out infinite',
       'spin-slow': 'wiggle 60s linear infinite',
       'move-to-right': 'moveX 0.5s forwards',
+      'spin-in': 'spin 1s linear infinite',
     },
   },
   plugins: [require('tailwindcss-animate'), require('flowbite/plugin')],

@@ -5,9 +5,12 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { register } from '../../services/apiServices';
 import { useSelector } from 'react-redux';
+import { Spinner } from 'flowbite-react';
 export const RegisterPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   useEffect(() => {
+    document.title = 'Đăng ký';
     if (isAuthenticated) return navigate('/');
   });
   const navigate = useNavigate();
@@ -108,7 +111,8 @@ export const RegisterPage = () => {
   };
   const handleSubmitBtn = async (e) => {
     e.preventDefault();
-    if (!validateUsername(username))
+    if (!validateUsername(username)) {
+      setIsLoading(false);
       return toast.error('Tên đăng nhập không hợp lệ!', {
         position: 'top-right',
         autoClose: 5000,
@@ -119,7 +123,10 @@ export const RegisterPage = () => {
         progress: undefined,
         theme: 'light',
       });
-    if (validateEmail(!email))
+    }
+
+    if (validateEmail(!email)) {
+      setIsLoading(false);
       return toast.error('Email không hợp lệ!', {
         position: 'top-right',
         autoClose: 5000,
@@ -130,8 +137,10 @@ export const RegisterPage = () => {
         progress: undefined,
         theme: 'light',
       });
+    }
 
-    if (!validatePassword(pwd))
+    if (!validatePassword(pwd)) {
+      setIsLoading(false);
       return toast.error('Mật khẩu quá yếu!', {
         position: 'top-right',
         autoClose: 5000,
@@ -142,7 +151,10 @@ export const RegisterPage = () => {
         progress: undefined,
         theme: 'light',
       });
-    if (pwd !== pwdComfirm)
+    }
+
+    if (pwd !== pwdComfirm) {
+      setIsLoading(false);
       return toast.error('Mật khẩu không trùng nhau!', {
         position: 'top-right',
         autoClose: 5000,
@@ -153,6 +165,7 @@ export const RegisterPage = () => {
         progress: undefined,
         theme: 'light',
       });
+    }
 
     let res;
     try {
@@ -165,6 +178,7 @@ export const RegisterPage = () => {
         pwdComfirm
       );
     } catch (error) {
+      setIsLoading(false);
       let myError = 'Lỗi! Vui lòng thử lại sau';
       if (error.response.data.keyValue.email)
         myError = `${error.response.data.keyValue.email} đã tồn tại`;
@@ -202,10 +216,17 @@ export const RegisterPage = () => {
             </h1>
           </div>
 
-          <form className="w-[80%] mx-auto" onSubmit={handleSubmitBtn}>
+          <form
+            className="w-[80%] mx-auto"
+            onSubmit={(e) => {
+              setIsLoading(true);
+              handleSubmitBtn(e);
+            }}
+          >
             <div className="grid grid-cols-2 gap-4">
               <div className="relative z-0 w-full mb-5 group">
                 <input
+                  disabled={isLoading}
                   type="text"
                   name="floating_first_name"
                   id="floating_first_name"
@@ -225,6 +246,7 @@ export const RegisterPage = () => {
               </div>
               <div className="relative z-0 w-full mb-5 group">
                 <input
+                  disabled={isLoading}
                   type="text"
                   name="floating_last_name"
                   id="floating_last_name"
@@ -245,6 +267,7 @@ export const RegisterPage = () => {
             </div>
             <div className="relative z-0 w-full mb-5 group">
               <input
+                disabled={isLoading}
                 type="text"
                 name="floating_username"
                 id="floating_username"
@@ -262,6 +285,7 @@ export const RegisterPage = () => {
             </div>
             <div className="relative z-0 w-full mb-5 group">
               <input
+                disabled={isLoading}
                 type="email"
                 name="floating_email"
                 id="floating_email"
@@ -281,6 +305,7 @@ export const RegisterPage = () => {
             </div>
             <div className="relative z-0 w-full mb-5 group">
               <input
+                disabled={isLoading}
                 type="password"
                 name="floating_password"
                 id="floating_password"
@@ -290,6 +315,7 @@ export const RegisterPage = () => {
                 onChange={handlePasswordChange}
               />
               <button
+                disabled={isLoading}
                 type="button"
                 className="absolute top-[20%] right-2 z-10 p-2"
                 onClick={() => {
@@ -315,6 +341,7 @@ export const RegisterPage = () => {
             </div>
             <div className="relative z-0 w-full mb-5 group">
               <input
+                disabled={isLoading}
                 type="password"
                 name="floating_comfirm_password"
                 id="floating_comfirm_password"
@@ -324,6 +351,7 @@ export const RegisterPage = () => {
                 onChange={handlePasswordComfirmChange}
               />
               <button
+                disabled={isLoading}
                 type="button"
                 className="absolute top-[20%] right-2 z-10 p-2"
                 onClick={() => {
@@ -349,9 +377,16 @@ export const RegisterPage = () => {
             </div>
 
             <button
+              disabled={isLoading}
               type="submit"
               className="text-white mb-8 w-[100%] rounded-4xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600  hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center0"
             >
+              <Spinner
+                hidden={!isLoading}
+                className="animate-spin-in mr-4"
+                aria-label="spinner example"
+                size="md"
+              />
               Đăng ký
             </button>
             <Link to="/log-in">

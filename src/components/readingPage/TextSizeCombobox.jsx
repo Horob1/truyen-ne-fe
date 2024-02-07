@@ -1,16 +1,24 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { Listbox } from '@headlessui/react';
-import { CheckIcon } from '@heroicons/react/20/solid';
+import { changeSizeSetting } from '../../redux/action/readingAction';
+import { useDispatch, useSelector } from 'react-redux';
 
-const textSize = ['sm', 'base', 'lg'];
+const textSize = ['sm', 'base', 'xl', '2xl', '3xl', '4xl'];
 
 export const TextSizeCombobox = () => {
   const [selectedTextSize, setSelectedTextSize] = useState(textSize[0]);
-
+  const dispatch = useDispatch();
+  const mySize = useSelector((state) => state.readingSetting.size);
+  useEffect(() => {
+    setSelectedTextSize(mySize);
+  }, []);
+  useEffect(() => {
+    dispatch(changeSizeSetting({ size: selectedTextSize }));
+  }, [selectedTextSize]);
   return (
     <Listbox value={selectedTextSize} onChange={setSelectedTextSize}>
       <Listbox.Button className="w-full">{selectedTextSize}</Listbox.Button>
-      <Listbox.Options className="absolute top-[90%] bg-be dark:bg-gray-700 w-[55%] p-4 rounded-lg border-2 border-gray-600 dark:border-white">
+      <Listbox.Options className=" absolute top-[90%] bg-be dark:bg-gray-700 w-[55%] p-4 rounded-lg border-2 border-gray-600 dark:border-white">
         {textSize.map((textSize, index) => (
           /* Use the `active` state to conditionally style the active option. */
           /* Use the `selected` state to conditionally style the selected option. */

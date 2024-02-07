@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 export const UserPage = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   useEffect(() => {
+    document.title = 'Hồ sơ';
     if (!isAuthenticated) return navigate('/log-in');
   });
   const navigate = useNavigate();

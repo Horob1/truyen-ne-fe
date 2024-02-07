@@ -1,12 +1,20 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { Listbox } from '@headlessui/react';
-import { CheckIcon } from '@heroicons/react/20/solid';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeFontSetting } from '../../redux/action/readingAction';
 
-const font = ['Time new roman', 'Arial', 'Patrick'];
+const font = ['sans', 'serif', 'mono', 'poppins', 'patrick'];
 
 export const FontCombobox = () => {
+  const dispatch = useDispatch();
+  const myFont = useSelector((state) => state.readingSetting.font);
   const [selectedFont, setSelectedFont] = useState(font[0]);
-
+  useEffect(() => {
+    setSelectedFont(myFont);
+  }, []);
+  useEffect(() => {
+    dispatch(changeFontSetting({ font: selectedFont }));
+  }, [selectedFont]);
   return (
     <Listbox value={selectedFont} onChange={setSelectedFont}>
       <Listbox.Button className="w-full">{selectedFont}</Listbox.Button>

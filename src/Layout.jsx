@@ -31,6 +31,7 @@ import { UpdateNovel } from './components/upLoadPage/UpdateNovel.jsx';
 import { ChapterList } from './components/upLoadPage/ChapterList.jsx';
 import { UpdateChapter } from './components/upLoadPage/chapter/UpdateChapter.jsx';
 import { AddChapter } from './components/upLoadPage/chapter/AddChapter.jsx';
+import { NotFound } from './components/404Page/NotFound.jsx';
 export const Layout = () => {
   return (
     <>
@@ -79,6 +80,7 @@ export const Layout = () => {
         <Route path="log-in" element={<LogInPage />}></Route>
         <Route path="register" element={<RegisterPage />}></Route>
         <Route path="forgot-pwd" element={<ForgotPwdPage />}></Route>
+        <Route path="*" element={<NotFound/>}></Route>
       </Routes>
       <ToastContainer />
     </>

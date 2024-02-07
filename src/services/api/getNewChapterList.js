@@ -1,7 +1,7 @@
 import axios from '../../utils/axiosCustomize';
 
 const getNewChapterList = async (query) => {
-  return await axios.get(`/api/collection/${id}`);
+  return await axios.get(`/api/novel/chapter${query}`);
 };
 
 export default getNewChapterList;

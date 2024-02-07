@@ -1,140 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getChapterList } from '../../../services/apiServices';
+import moment from 'moment';
 
-export const ChapterTab = () => {
+export const ChapterTab = (props) => {
+  const [chapterList, setChapterList] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (props?.novel) {
+        try {
+          const res = await getChapterList(props?.novel);
+          setChapterList(res?.data?.chapterList || []);
+        } catch (error) {}
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="grid grid-cols-3 gap-y-1 w-full">
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2  "
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
-      <Link
-        to={'/'}
-        class="col-span-3 md:col-span-1 w-full relative py-2 border-b-2"
-      >
-        <div className=" overflow-x-hidden md:w-[80%] w-full">
-          <h1 className="truncate text-sm">
-            Quyển 1: Tiên duyên mờ mịt, xa không thể chạm / Chương 1: Thằng Ngốc
-            cùng Con Bệnh
-            <small class="text-gray-400 ml-2">(2 năm trước)</small>
-          </h1>
-        </div>
-      </Link>
+      {chapterList.map((chapter) => (
+        <Link
+          key={chapter?.id}
+          to={`/novel/${props.nSlug}/${chapter?.slug}`}
+          className="col-span-3 md:col-span-1 w-full relative py-2 border-b-2  "
+        >
+          <div className=" overflow-x-hidden md:w-[80%] w-full">
+            <h1 className="truncate text-sm">
+              {'Chương ' + chapter?.number + ': ' + chapter?.name}
+              <small className="text-gray-400 ml-2">
+                {`(${moment(new Date(chapter?.createTime)).format(
+                  'YYYY-MM-DD'
+                )})`}
+              </small>
+            </h1>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };

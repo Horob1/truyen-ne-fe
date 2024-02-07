@@ -30,15 +30,18 @@ export const Card = (props) => {
             <h5 className="pl-1 truncate text-base w-[50%] font-normal">
               {props.info?.author?.name
                 ? props.info?.author?.name
-                : props.info.translator.firstName +
+                : props.info?.translator?.firstName +
                   ' ' +
-                  props.info.translator.lastName}
+                  props.info?.translator?.lastName}
             </h5>
-            <button className="text-[10px] h-6 pl-2 pr-2 absolute bottom-0 right-0 border-[1px] border-orange-700 text-orange-700">
+            <Link
+              to={`novel/search?category=${props.info?.categories[0]?.id}`}
+              className="text-[10px] h-6 pl-2 pr-2 absolute bottom-0 right-0 border-[1px] border-orange-700 text-orange-700"
+            >
               {props.info?.categories[0]?.name
                 ? props.infor.categories[0].name
                 : 'Chưa rõ'}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

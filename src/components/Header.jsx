@@ -13,11 +13,10 @@ import { MdOutlineCollections } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { doLogout } from '../redux/action/userAction';
 import { toast } from 'react-toastify';
-const Header = (props) => {
+const Header = () => {
   const [isShowUserMenu, setIsShowUserMenu] = useState(false);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
-  console.log(account.avatar);
   const [toggle, setToggle] = useState(false);
   const dispatch = useDispatch();
   const handleLogOutBtn = () => {
@@ -86,7 +85,7 @@ const Header = (props) => {
                   className="h-8 w-8 rounded-full"
                   alt="avatar"
                 />
-                <span className="ml-2 hover:text-yellow-400">
+                <span className="ml-2 hover:text-yellow-400 hover:cursor-pointer">
                   {account.firstName + ' ' + account.lastName}
                 </span>
               </div>
@@ -114,7 +113,7 @@ const Header = (props) => {
                     </Link>
                   </li>
                   <li
-                    className="pl-3 hover:bg-yellow-50 rounded-b-xl"
+                    className="pl-3 hover:bg-yellow-50 rounded-b-xl hover:cursor-pointer"
                     onClick={handleLogOutBtn}
                   >
                     <span className="flex items-center">

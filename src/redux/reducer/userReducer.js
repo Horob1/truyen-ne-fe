@@ -1,4 +1,8 @@
-import { FETCH_USER_LOGIN, USER_LOG_OUT } from '../action/userAction';
+import {
+  FETCH_USER_LOGIN,
+  USER_LOG_OUT,
+  USER_UPDATE_INFO,
+} from '../action/userAction';
 
 const INITIAL_STATE = {
   account: {
@@ -41,6 +45,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
           avatar: '',
         },
         isAuthenticated: false,
+      };
+    case USER_UPDATE_INFO:
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          firstName: action?.payload?.data?.user?.firstName,
+          lastName: action?.payload?.data?.user?.lastName,
+          avatar: action?.payload?.data?.user?.avatar,
+        },
       };
     default:
       return state;
