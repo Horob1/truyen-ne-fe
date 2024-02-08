@@ -1,12 +1,17 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-const people = [{ name: 'Hoàn thành' }, { name: 'Chưa hoàn thành' }];
+const people = [
+  { name: 'Chưa hoàn thành', id: 0 },
+  { name: 'Hoàn thành', id: 1 },
+];
 
-export default function StatusNovel() {
-  const [selected, setSelected] = useState(people[0]);
-
+export default function StatusNovel(props) {
+  const [selected, setSelected] = useState(people[props.status]);
+  useEffect(() => {
+    props.setStatus(selected.id);
+  }, [selected]);
   return (
     <div className="w-52">
       <Listbox value={selected} onChange={setSelected}>

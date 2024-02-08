@@ -55,7 +55,7 @@ export const AddNovel = () => {
     e.preventDefault();
     setOpenModal(true);
     try {
-      const res = createNovel(
+      const res = await createNovel(
         name,
         description,
         author,
@@ -63,19 +63,20 @@ export const AddNovel = () => {
         photoImg,
         coverImg
       );
-      toast.success('🦄 Thành công!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
-      navigate('/up-load/my-novel');
+      if (res) {
+        toast.success('🦄 Thành công!', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        navigate('/up-load/my-novel');
+      }
     } catch (error) {
-      console.log(error);
       toast.error('💣 Lỗi xin thử lại', {
         position: 'top-right',
         autoClose: 5000,

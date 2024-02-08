@@ -47,6 +47,8 @@ export const LogInPage = () => {
       progress: undefined,
       theme: 'light',
     });
+    console.log(res);
+
     dispatch(doLogin(res));
     return navigate('/');
   };

@@ -19,7 +19,7 @@ export const UpdateAuthor = () => {
   const navigate = useNavigate();
   const handleUpdateAuthor = async () => {
     try {
-      const res = updateAuthor(param.aId, name, description, birthday);
+      const res = await updateAuthor(param.aId, name, description, birthday);
       toast.success('🦄 Thành công!', {
         position: 'top-right',
         autoClose: 5000,

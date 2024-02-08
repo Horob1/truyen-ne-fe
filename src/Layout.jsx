@@ -53,7 +53,7 @@ export const Layout = () => {
           <Route path="my-novel" element={<MyNovel />}></Route>
           <Route path="my-novel/:nId" element={<UpdateNovel />}></Route>
           <Route
-            path="my-novel/update-chapter/:cId"
+            path="my-novel/update-chapter/:nId/:cId"
             element={<UpdateChapter></UpdateChapter>}
           ></Route>
           <Route

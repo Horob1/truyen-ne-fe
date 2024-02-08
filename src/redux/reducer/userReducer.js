@@ -1,5 +1,6 @@
 import {
   FETCH_USER_LOGIN,
+  UPDATE_ACCESS_TONKEN,
   USER_LOG_OUT,
   USER_UPDATE_INFO,
 } from '../action/userAction';
@@ -54,6 +55,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
           firstName: action?.payload?.data?.user?.firstName,
           lastName: action?.payload?.data?.user?.lastName,
           avatar: action?.payload?.data?.user?.avatar,
+        },
+      };
+    case UPDATE_ACCESS_TONKEN:
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          access_token: action?.payload?.accessToken,
         },
       };
     default:

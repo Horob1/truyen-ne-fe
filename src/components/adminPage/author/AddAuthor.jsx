@@ -9,10 +9,10 @@ export const AddAuthor = () => {
   const [description, setDescription] = useState('');
   const [birthday, setBirthday] = useState('');
   const navigate = useNavigate();
-  const handleSBtn = (e) => {
+  const handleSBtn = async (e) => {
     e.preventDefault();
     try {
-      const res = createAuthor(name, description, birthday);
+      const res = await createAuthor(name, description, birthday);
       toast.success('🦄 Thành công!', {
         position: 'top-right',
         autoClose: 5000,
