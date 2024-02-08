@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { store } from '../redux/store.js';
 import { doLogout, updateAT } from '../redux/action/userAction.js';
+import axiosRetry from 'axios-retry';
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:3000/',
+  baseURL: 'http://localhost:3000',
 });
 
-// axiosRetry(instance, {
-//   retryDelay: (retryCount) => {
-//     return retryCount * 1000;
-//   },
-//   retryCondition: (error) => {
-//     return error.response.data.name === 'TokenExpiredError';
-//   },
-// });
+axiosRetry(instance, {
+  retryDelay: (retryCount) => {
+    return retryCount * 1000;
+  },
+  retryCondition: (error) => {
+    return error.response.data.name === 'TokenExpiredError';
+  },
+});
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
@@ -41,7 +42,7 @@ instance.interceptors.response.use(
         const refreshToken = store?.getState()?.user?.account?.refresh_token;
 
         const response = await axios.post(
-          'http://127.0.0.1:3000/auth/refresh-token',
+          'http://localhost:3000/auth/refresh-token',
           {
             refreshToken,
           }
