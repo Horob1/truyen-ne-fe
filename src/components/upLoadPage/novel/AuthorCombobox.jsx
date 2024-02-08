@@ -1,24 +1,26 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-const people = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook' },
-  { id: 5, name: 'Tanya Fox' },
-  { id: 6, name: 'Hellen Schmidt' },
-];
+// const people = [
+//   { id: 1, name: 'Wade Cooper' },
+//   { id: 2, name: 'Arlene Mccoy' },
+//   { id: 3, name: 'Devon Webb' },
+//   { id: 4, name: 'Tom Cook' },
+//   { id: 5, name: 'Tanya Fox' },
+//   { id: 6, name: 'Hellen Schmidt' },
+// ];
 
-export default function AuthorCombobox() {
-  const [selected, setSelected] = useState(people[0]);
+export default function AuthorCombobox(props) {
+  const [selected, setSelected] = useState(props.people[0]);
   const [query, setQuery] = useState('');
-
-  const filteredPeople =
+  useEffect(() => {
+    props.setAuthor(selected.id);
+  }, [selected]);
+  let filteredPeople =
     query === ''
-      ? people
-      : people.filter((person) =>
+      ? props.people
+      : props.people.filter((person) =>
           person.name
             .toLowerCase()
             .replace(/\s+/g, '')

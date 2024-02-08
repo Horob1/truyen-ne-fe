@@ -107,12 +107,14 @@ export const SearchPage = () => {
               {currentSearch}
             </span>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 mx-4 min-h-[80vh] ">
+          <div className="grid md:grid-cols-2 gap-6 mx-4 ">
             {novel.map((nov) => (
               <SearchItem key={nov.id} novel={nov} />
             ))}
           </div>
-          <MyPagination setPage={setCurrentPage} page={currentPage} />
+          {novel.length !== 0 && (
+            <MyPagination setPage={setCurrentPage} page={currentPage} />
+          )}
         </div>
       </div>
     </div>

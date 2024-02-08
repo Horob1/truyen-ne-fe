@@ -47,11 +47,11 @@ export const UpdateNovel = () => {
         <div className="flex">
           <div className="mt-6">
             <span className="font-medium">Tác giả </span>
-            <AuthorCombobox />
+            {/* <AuthorCombobox /> */}
           </div>
           <div className="mt-6 ml-10">
             <span className="font-medium">Thể loại </span>
-            <CategoryCombobox />
+            {/* <CategoryCombobox /> */}
           </div>
           <div className="mt-6 ml-10">
             <span className="font-medium">Trạng thái </span>

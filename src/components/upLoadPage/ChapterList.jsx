@@ -11,87 +11,29 @@ export const ChapterList = () => {
         <div className="relative truncate">
           <table className="table-fixed w-full text-left rtl:text-right text-base ">
             <tbody className="px-4">
-              <Link>
-                <tr className="w-full grid grid-cols-9 gap-6 py-2 hover:bg-be px-2">
-                  <th className="col-span-1">
-                    <h5 className="font-light truncate">1</h5>
-                  </th>
-                  <th className="col-span-4">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </th>
-                  <th className="col-span-2">
-                    <h5 className="truncate font-light">
-                      Ngày 24-10-2003 16h30
-                    </h5>
-                  </th>
-                  <th className="col-span-1">
-                    <button>
-                      <MdEditSquare className="text-green-600" />
-                    </button>
-                  </th>
-                  <th className="col-span-1">
-                    <button>
-                      <MdDelete className="text-red-600"></MdDelete>
-                    </button>
-                  </th>
-                </tr>
-              </Link>
-              <Link>
-                <tr className="w-full grid grid-cols-9 gap-6 py-2 hover:bg-be px-2">
-                  <th className="col-span-1">
-                    <h5 className="font-light truncate">1</h5>
-                  </th>
-                  <th className="col-span-4">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </th>
-                  <th className="col-span-2">
-                    <h5 className="truncate font-light">
-                      Ngày 24-10-2003 16h30
-                    </h5>
-                  </th>
-                  <th className="col-span-1">
-                    <button>
-                      <MdEditSquare className="text-green-600" />
-                    </button>
-                  </th>
-                  <th className="col-span-1">
-                    <button>
-                      <MdDelete className="text-red-600"></MdDelete>
-                    </button>
-                  </th>
-                </tr>
-              </Link>
-              <Link>
-                <tr className="w-full grid grid-cols-9 gap-6 py-2 hover:bg-be px-2">
-                  <th className="col-span-1">
-                    <h5 className="font-light truncate">1</h5>
-                  </th>
-                  <th className="col-span-4">
-                    <h5 className="truncate">
-                      Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
-                    </h5>
-                  </th>
-                  <th className="col-span-2">
-                    <h5 className="truncate font-light">
-                      Ngày 24-10-2003 16h30
-                    </h5>
-                  </th>
-                  <th className="col-span-1">
-                    <button>
-                      <MdEditSquare className="text-green-600" />
-                    </button>
-                  </th>
-                  <th className="col-span-1">
-                    <button>
-                      <MdDelete className="text-red-600"></MdDelete>
-                    </button>
-                  </th>
-                </tr>
-              </Link>
+              <tr className="w-full grid grid-cols-9 gap-6 py-2 hover:bg-be px-2">
+                <th className="col-span-1">
+                  <h5 className="font-light truncate">1</h5>
+                </th>
+                <th className="col-span-4">
+                  <h5 className="truncate">
+                    Ta là Hồn Hoa Thánh Tái Sinh Làm Người Thanh Hóa
+                  </h5>
+                </th>
+                <th className="col-span-2">
+                  <h5 className="truncate font-light">Ngày 24-10-2003 16h30</h5>
+                </th>
+                <th className="col-span-1">
+                  <button>
+                    <MdEditSquare className="text-green-600" />
+                  </button>
+                </th>
+                <th className="col-span-1">
+                  <button>
+                    <MdDelete className="text-red-600"></MdDelete>
+                  </button>
+                </th>
+              </tr>
             </tbody>
           </table>
         </div>

@@ -8,13 +8,13 @@ import { Link, Outlet, useNavigate, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export const UploadPage = () => {
-  const role = useSelector((state) => state.user.account.role);
+  const account = useSelector((state) => state.user.account);
   const navigate = useNavigate();
   useEffect(() => {
     if (screen.width < 1280) {
       navigate('/');
     }
-    if (role === 'user') navigate('/');
+    if (account.role === 'user' || !account.role) navigate('/');
   });
   return (
     <div className="grid grid-cols-12">
@@ -62,13 +62,14 @@ export const UploadPage = () => {
         <div className="m-auto mb-10 p-8 rounded-lg  bg-gradient-to-tr from-violet-500 to-pink-400  shadow-xl w-[80%] flex-col">
           <img
             src={
+              account.avatar ||
               'https://scontent.fhan5-9.fna.fbcdn.net/v/t39.30808-6/399825645_3255842764713267_2308659912949694663_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeGwlOMJ2zTgDf18EI4tmbys5nCnYITr8MTmcKdghOvwxDvwiRqE48dT_bFnQCHyGshwrazx79nZEIRWfdFKcmpN&_nc_ohc=m85tlUaNtUQAX_4JTnE&_nc_ht=scontent.fhan5-9.fna&oh=00_AfDo3ZF6_R7l70iCQkpC7pY1nTWj6YMojA7RwpwOcBPGKg&oe=65C381F7'
             }
             className="m-auto h-[100px] rounded-full w-[100px] "
             alt="avatar"
           />
           <small className="m-auto block text-center mt-4 text-white ">
-            Admin Thế Anh
+            {account.role.toUpperCase() + ' ' + account.firstName + ' ' + account.lastName}
           </small>
 
           <Link to={'/'}>

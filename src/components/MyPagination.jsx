@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 export const MyPagination = (props) => {
   // const [currentPage, setCurrentPage] = useState(1);
-
+  {
+    /* <MyPagination setPage={setCurrentPage} page={currentPage} /> */
+  }
   const onPageChange = (page) => {
     props.setPage(page);
   };
