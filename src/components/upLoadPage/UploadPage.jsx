@@ -11,6 +11,7 @@ export const UploadPage = () => {
   const account = useSelector((state) => state.user.account);
   const navigate = useNavigate();
   useEffect(() => {
+    document.title = 'Up load';
     if (screen.width < 1280) {
       navigate('/');
     }
@@ -69,7 +70,11 @@ export const UploadPage = () => {
             alt="avatar"
           />
           <small className="m-auto block text-center mt-4 text-white ">
-            {account.role.toUpperCase() + ' ' + account.firstName + ' ' + account.lastName}
+            {account.role.toUpperCase() +
+              ' ' +
+              account.firstName +
+              ' ' +
+              account.lastName}
           </small>
 
           <Link to={'/'}>
