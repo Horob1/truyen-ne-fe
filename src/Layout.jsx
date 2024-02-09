@@ -3,7 +3,7 @@ import React from 'react';
 import App from './App.jsx';
 import { Route, Routes } from 'react-router-dom';
 import { LogInPage } from './components/loginPage/LogInPage.jsx';
-import { RegisterPage } from './components/registerPage/registerPage.jsx';
+import { RegisterPage } from './components/registerPage/RegisterPage.jsx';
 import { HomePage } from './components/homePage/HomePage.jsx';
 import { ForgotPwdPage } from './components/forgotPwdPass/ForgotPwdPage.jsx';
 import { ToastContainer } from 'react-toastify';
