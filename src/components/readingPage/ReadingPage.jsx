@@ -79,8 +79,8 @@ export const ReadingPage = () => {
             const view = await upView(res?.data?.chapter[0]?.id);
           }
         }
-        setIsLoading(false);
       } catch (error) {}
+      setIsLoading(false);
     };
     fetchData();
     if (theme === 'dark') setSwitch1(true);
