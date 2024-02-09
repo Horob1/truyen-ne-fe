@@ -4,7 +4,7 @@ import Footer from '../Footer';
 import imgCover from './../../assets/test.webp';
 import img from './../../assets/novel.jpg';
 import { FaStar, FaGlasses, FaBookmark, FaCheck } from 'react-icons/fa';
-import { TabInfo } from './info/tabInfo';
+import { TabInfo } from './info/TabInfo';
 import { ReviewTab } from './review/ReviewTab';
 import { ChapterTab } from './chapterList/ChapterTab';
 import { Link, useParams } from 'react-router-dom';
