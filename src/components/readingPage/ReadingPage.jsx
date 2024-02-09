@@ -27,6 +27,7 @@ import { FaBookmark } from 'react-icons/fa';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeThemeSetting } from '../../redux/action/readingAction';
+import upView from '../../services/api/upView';
 
 export const ReadingPage = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ export const ReadingPage = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const novelResponse = await getNovel(`?slug=${slug.nSlug}`);
         setNovel(novelResponse?.data?.novels[0]);
@@ -58,14 +60,11 @@ export const ReadingPage = () => {
 
           setChapter(res?.data?.chapter[0]);
           if (res?.data?.chapter[0]?.content) {
-            setIsLoading(false);
             document.title =
               'Chương ' +
               res?.data?.chapter[0]?.number +
               ' ' +
               res?.data?.chapter[0]?.name;
-            document.getElementById('content').innerHTML =
-              res?.data?.chapter[0]?.content.replace(/<\/p>/g, '</p><br>');
             if (novelResponse?.data?.novels[0]) {
               const bookmarkResponse = await getMarkBook(
                 novelResponse.data.novels[0].id
@@ -77,8 +76,10 @@ export const ReadingPage = () => {
                 res?.data?.chapter[0]?.id
               );
             }
+            const view = await upView(res?.data?.chapter[0]?.id);
           }
         }
+        setIsLoading(false);
       } catch (error) {}
     };
     fetchData();
@@ -250,16 +251,21 @@ export const ReadingPage = () => {
                 size === '4xl' ? 'font-light' : ''
               } text-${size}`}
             >
-              <article id="content" className={`pb-32 font-${font}`}>
-                <div className="hidden">
-                  <span className="font-sans">C</span>
-                  <span className="font-patrick">H</span>
-                  <span className="font-playfair">A</span>
-                  <span className="font-protes">T</span>
-                  <span className="font-roboto">E</span>
-                  <span className="font-mono">R</span>
-                </div>
-              </article>
+              <article
+                id="content"
+                dangerouslySetInnerHTML={{
+                  __html: chapter.content.replace(/<\/p>/g, '</p><br>'),
+                }}
+                className={`pb-32 font-${font}`}
+              ></article>
+              <div className="hidden">
+                <span className="font-sans">C</span>
+                <span className="font-patrick">H</span>
+                <span className="font-playfair">A</span>
+                <span className="font-protes">T</span>
+                <span className="font-roboto">E</span>
+                <span className="font-mono">R</span>
+              </div>
               ===============
             </div>
             <div className="pt-8 md:pt-16 grid grid-cols-1 md:grid-cols-2">

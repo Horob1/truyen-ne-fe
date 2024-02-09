@@ -3,7 +3,7 @@ import { store } from '../redux/store.js';
 import { doLogout, updateAT } from '../redux/action/userAction.js';
 import axiosRetry from 'axios-retry';
 const instance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://truyen-ne-api.onrender.com/',
 });
 
 axiosRetry(instance, {
@@ -42,7 +42,7 @@ instance.interceptors.response.use(
         const refreshToken = store?.getState()?.user?.account?.refresh_token;
 
         const response = await axios.post(
-          'http://localhost:3000/auth/refresh-token',
+          'https://truyen-ne-api.onrender.com/auth/refresh-token',
           {
             refreshToken,
           }
