@@ -13,6 +13,7 @@ import { MdOutlineCollections } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { doLogout } from '../redux/action/userAction';
 import { toast } from 'react-toastify';
+import { logout } from '../services/apiServices';
 const Header = () => {
   const [search, setSearch] = useState('');
   const [isShowUserMenu, setIsShowUserMenu] = useState(false);
@@ -20,18 +21,32 @@ const Header = () => {
   const account = useSelector((state) => state.user.account);
   const [toggle, setToggle] = useState(false);
   const dispatch = useDispatch();
-  const handleLogOutBtn = () => {
-    dispatch(doLogout());
-    toast.info('Quay trở lại sớm nhé bạn yêu💕', {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
-    });
+  const handleLogOutBtn = async () => {
+    try {
+      const res = await logout();
+      dispatch(doLogout());
+      toast.info('Quay trở lại sớm nhé bạn yêu💕', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    } catch (error) {
+      toast.error('Xin thử lại sau💕', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
   };
   const handleToggleMenu = () => {
     setToggle(!toggle);
@@ -147,16 +162,18 @@ const Header = () => {
       {toggle && (
         <ul className="absolute bg-be px-8 w-full md:hidden pb-4 z-50">
           <div className="relative py-[12px]">
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="Tìm kiếm"
-              className="px-8 py-2 rounded-md w-full"
-            />
-            <button className="absolute top-[24px] right-[16px]">
-              <CiSearch />
-            </button>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name=""
+                id=""
+                placeholder="Tìm kiếm"
+                className="px-8 py-2 rounded-md w-full"
+              />
+              <button className="absolute top-[24px] right-[16px]">
+                <CiSearch />
+              </button>
+            </form>
           </div>
           {!isAuthenticated ? (
             <>

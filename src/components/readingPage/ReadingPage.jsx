@@ -87,7 +87,11 @@ export const ReadingPage = () => {
   if (!chapter) return <NotFound />;
   if (isLoading)
     return (
-      <div className="w-full h-screen flex">
+      <div
+        className={`w-screen h-screen flex ${
+          theme === 'dark' ? 'bg-black' : ''
+        }`}
+      >
         <div className="m-auto">
           <Spinner
             className="animate-spin-in "

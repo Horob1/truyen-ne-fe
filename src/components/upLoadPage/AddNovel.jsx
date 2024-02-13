@@ -112,7 +112,7 @@ export const AddNovel = () => {
           <label htmlFor="floating_desc" className=" font-medium ">
             Mô tả
           </label>
-          <input
+          <textarea
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

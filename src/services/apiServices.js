@@ -22,8 +22,9 @@ import deleteComment from './api/deleteComment';
 import updateComment from './api/updateComment';
 import getAuthor from './api/getAuthor';
 import getCategories from './api/getCategories';
-
+import logout from './api/logout';
 export {
+  logout,
   getAuthor,
   deleteComment,
   createComment,
