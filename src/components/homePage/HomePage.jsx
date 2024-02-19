@@ -13,7 +13,7 @@ export const HomePage = () => {
       <div className="flex justify-center">
         <div className="m-auto grid md:grid-cols-3 grid-cols-1 gap-6 w-full md:max-w-[1000px] lg:max-w-[1280px] max-w-[98%] md:max-w-">
           <RateList sortBy="?sort=-createTime" top="Mới ra lò"></RateList>
-          <RateList sortBy="?sort=-view" top="Xem nhiều nhất"></RateList>
+          <RateList sortBy="?sort=-watch" top="Xem nhiều nhất"></RateList>
           <RateList sortBy="?sort=-progress" top="Nhiều chương nhất"></RateList>
         </div>
       </div>
