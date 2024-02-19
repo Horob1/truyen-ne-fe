@@ -78,7 +78,7 @@ export const AddChapter = () => {
     <div className="mx-auto mt-[2%] w-[96%] rounded-lg p-8">
       <h1 className="text-xl font-medium">Truyện {novel.name}</h1>
       <small>Thêm mới chapter! </small>
-      <small>Chapter số: {novel.progress}</small>
+      <small>Chapter số: {novel.progress +1}</small>
 
       <div
         className="mt-6 gap-4 rounded-md w-full bg-white p-8"
