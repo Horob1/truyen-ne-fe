@@ -1,14 +1,13 @@
 import React from 'react';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
-import { ImGithub } from 'react-icons/im';
+import bg from '../assets/footerbg.png';
 
 const Footer = () => {
-  const footerBg = '/src/assets/footerbg.png';
   return (
     <div
       className=" w-[100%] bg-cover bg-center h-[200px] mt-8"
-      style={{ backgroundImage: `url(${footerBg})` }}
+      style={{ backgroundImage: `url(${bg})` }}
     >
       <div className="flex flex-col">
         <Link to="/" className="pl-4 m-auto">

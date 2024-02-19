@@ -5,6 +5,7 @@ import { MyPagination } from '../MyPagination';
 import removeAccents from '../../utils/removeAccents';
 import { getCategories } from '../../services/apiServices';
 import { Link, useLocation } from 'react-router-dom';
+import { TranslatorInfo } from './../inforPage/info/TranslatorInfo';
 export const SearchPage = () => {
   const location = useLocation();
   const [currentSearch, setCurrentSearch] = useState('');
@@ -12,26 +13,29 @@ export const SearchPage = () => {
   const [currentCate, setCurrentCate] = useState('');
   const [currentStatus, setCurrentStatus] = useState('');
   const [categories, setCategories] = useState([]);
+  const [translator, setTranslator] = useState('');
   const [novel, setNovel] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const categoriesRes = await getCategories();
+        setCategories(categoriesRes?.data?.categories);
         let myQ = {};
         if (searchParam) myQ = { ...myQ, slug: { $regex: searchParam } };
         if (categoryParam) myQ = { ...myQ, categories: categoryParam };
         if (statusParam === '0') myQ = { ...myQ, status: 'Chưa hoàn thành' };
         if (statusParam === '1') myQ = { ...myQ, status: 'Hoàn thành' };
+        if (translatorParam) myQ = { ...myQ, translator: translatorParam };
         const res = await getNovel(
           `?q=${JSON.stringify(myQ)}&page=${currentPage}`
         );
         setNovel(res.data.novels);
-        const categoriesRes = await getCategories();
-        setCategories(categoriesRes?.data?.categories);
       } catch (error) {}
     };
     setCurrentCate('');
     setCurrentStatus('');
     setCurrentSearch('');
+    setTranslator('');
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     let searchParam = params.get('search');
@@ -47,6 +51,9 @@ export const SearchPage = () => {
     let categoryParam = params.get('category');
     if (categoryParam === 'undefined') categoryParam = null;
     if (categoryParam) setCurrentCate(categoryParam);
+    let translatorParam = params.get('translator');
+    console.log(params);
+    if (translatorParam) setTranslator(translatorParam);
     fetchData();
   }, [currentPage, location]);
 
@@ -102,7 +109,7 @@ export const SearchPage = () => {
         </div>
         <div className="col-span-4 md:col-span-3">
           <div className="my-4">
-            Kết quả cho:{' '}
+            {novel.length} kết quả cho:{' '}
             <span className="font-medium text-red-600 text-sm">
               {currentSearch}
             </span>
@@ -112,9 +119,7 @@ export const SearchPage = () => {
               <SearchItem key={nov.id} novel={nov} />
             ))}
           </div>
-          {novel.length !== 0 && (
-            <MyPagination setPage={setCurrentPage} page={currentPage} />
-          )}
+          <MyPagination setPage={setCurrentPage} page={currentPage} />
         </div>
       </div>
     </div>
