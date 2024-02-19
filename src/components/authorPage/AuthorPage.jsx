@@ -29,7 +29,6 @@ export const AuthorPage = () => {
     };
     fetchData();
   }, [currentPage, param]);
-  if (!author) return <NotFound></NotFound>;
   if (isLoading)
     return (
       <div className="w-full h-screen flex">
@@ -42,6 +41,7 @@ export const AuthorPage = () => {
         </div>
       </div>
     );
+  if (!author && isLoading === false) return <NotFound></NotFound>;
   return (
     <div>
       <Header />

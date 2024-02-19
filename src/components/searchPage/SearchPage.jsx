@@ -52,7 +52,6 @@ export const SearchPage = () => {
     if (categoryParam === 'undefined') categoryParam = null;
     if (categoryParam) setCurrentCate(categoryParam);
     let translatorParam = params.get('translator');
-    console.log(params);
     if (translatorParam) setTranslator(translatorParam);
     fetchData();
   }, [currentPage, location]);
