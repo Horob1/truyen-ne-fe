@@ -55,9 +55,11 @@ export const RateList = (props) => {
                   <FaMedal className="w-6 h-6 text-yellow-300" />
                 </h5>
                 <div className="overflow-hidden pl-2 mr-2 text-sm w-full">
+                <a href={`/novel/${el.slug}`}>
                   <h2 className="truncate text-base font-medium  hover:text-yellow-400 hover:drop-shadow-md">
                     {el?.name}
                   </h2>
+                </a>
                   <span className="flex items-center text-green-500">
                     <GrView className="mr-2"></GrView>
                     {el?.watch}
