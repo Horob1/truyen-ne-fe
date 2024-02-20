@@ -253,7 +253,7 @@ export const ReadingPage = () => {
               </Link>
             </div>
             <div className="md:pt-12">
-              <h1 className="md:text-3xl text-xl ">
+              <h1 className="md:text-3xl text-xl block w-[90%]">
                 {`Chương ${chapter.number || '...'}: ${chapter.name || '...'}`}
               </h1>
 
