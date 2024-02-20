@@ -47,6 +47,12 @@ export const ReadingPage = () => {
       setBookMark(res?.data?.collection);
     } catch (error) {}
   };
+  const scrollToSection = () => {
+    const targetElement = document.getElementById("comment");
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -176,11 +182,9 @@ export const ReadingPage = () => {
                 </div>
               </li>
               <li className="block  bg-read dark:bg-gray-700  border-gray-300 rounded-b-xl">
-                <a href="#comment">
-                  <div className=" py-4 px-8">
+                  <div className=" py-4 px-8" onClick={scrollToSection}>
                     <IoChatboxEllipsesOutline className="text-2xl" />
                   </div>
-                </a>
               </li>
             </ul>
           </div>
