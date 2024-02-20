@@ -83,7 +83,7 @@ export const ReadingPage = () => {
     };
     fetchData();
     if (theme === 'dark') setSwitch1(true);
-  }, [slug]);
+  }, [slug.nSlug, slug.cSlug]);
   if (!chapter) return <NotFound />;
   if (isLoading)
     return (
