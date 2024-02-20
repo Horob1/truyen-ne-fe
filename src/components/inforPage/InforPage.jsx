@@ -95,15 +95,18 @@ export const InforPage = () => {
                     </button>
                   </Link>
                 )}
-
+              <Link to={novel?.status==="Chưa hoàn thành"? '/novel/search?status=0': '/novel/search?status=1'}>
                 <button className="py-1 px-2 rounded-3xl border-[1px] border-green-500 text-green-500 mr-2">
                   {novel?.status}
                 </button>
+              </Link>
+              <Link to={`/novel/search?category=${novel?.categories?.id}`}>
                 <button className="py-1 px-2 rounded-3xl border-[1px] border-yellow-500 text-yellow-500 mr-2">
                   {novel?.categories?.name
                     ? novel?.categories?.name
                     : 'Chưa biết'}
                 </button>
+              </Link>
               </div>
               <div className="hidden sm:flex">
                 <div>
