@@ -13,7 +13,8 @@ export const Comment = (props) => {
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [content, setContent] = useState('');
   const username = useSelector((state) => state.user.account.username);
-  const handleDeleteBtn = async () => {
+  const handleDeleteBtn = async (e) => {
+    e.preventDefault()
     try {
       const res = await deleteComment(props.comment.id);
       props.setCommentList(
@@ -22,7 +23,8 @@ export const Comment = (props) => {
     } catch (error) {}
     setOpenModal(false);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       const res = await updateComment(props.comment.id, content);
       props.setCommentList(
