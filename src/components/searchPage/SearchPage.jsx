@@ -9,6 +9,7 @@ import { TranslatorInfo } from './../inforPage/info/TranslatorInfo';
 export const SearchPage = () => {
   const location = useLocation();
   const [currentSearch, setCurrentSearch] = useState('');
+  const [sort, setSort] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [currentCate, setCurrentCate] = useState('');
   const [currentStatus, setCurrentStatus] = useState('');
@@ -27,7 +28,9 @@ export const SearchPage = () => {
         if (statusParam === '1') myQ = { ...myQ, status: 'Hoàn thành' };
         if (translatorParam) myQ = { ...myQ, translator: translatorParam };
         const res = await getNovel(
-          `?q=${JSON.stringify(myQ)}&page=${currentPage}`
+          `?q=${JSON.stringify(myQ)}&page=${currentPage}&sort=${
+            sortParams ? sortParams : '-createTime'
+          }`
         );
         setNovel(res.data.novels);
       } catch (error) {}
@@ -53,6 +56,9 @@ export const SearchPage = () => {
     if (categoryParam) setCurrentCate(categoryParam);
     let translatorParam = params.get('translator');
     if (translatorParam) setTranslator(translatorParam);
+    fetchData();
+    let sortParams = params.get('sort');
+    if (sortParams) setSort(sortParams);
     fetchData();
   }, [currentPage, location]);
 
