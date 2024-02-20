@@ -32,7 +32,7 @@ export const MyCarousel = () => {
     <div className="hidden md:h-80 sm:flex xl:h-96 2xl:h-120 ">
       <Carousel theme={customTheme} slideInterval={60000}>
         {list.map((el, index) => (
-         <a href={`/novel/${el.slug}`} key={index} className="block">  
+         <a href={`/novel/${el.slug}`} key={index} className="h-[100%] block">  
           <img
             src={el?.coverImg ? el?.coverImg : test}
             alt="..."
