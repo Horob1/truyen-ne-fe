@@ -22,7 +22,7 @@ export const NewList = () => {
     <div className="flex md:-translate-y-10">
       <div className="m-auto p-2 md:max-w-[1000px] lg:max-w-[1280px] w-full max-w-[98%]  ">
         <div className="flex  items-center	 text-xl pb-8 ">
-          <h2 className="text-start font-bold ">Truyện đã đọc</h2>
+          <h2 className="text-start font-bold ">Truyện mới cập nhật</h2>
           <a
             href="/novel/search"
             className=" hover:text-yellow-400 text-yellow-900 text-base align-baseline ml-4"
@@ -61,13 +61,15 @@ export const NewList = () => {
                     </Link>
                   </th>
                   <th className="col-span-2 hidden md:flex">
-                    <h5 className="truncate font-light ">
-                      {el?.novel?.author?.name
-                        ? el?.novel?.author?.name
-                        : el?.translator?.firstName +
-                          ' ' +
-                          el?.translator?.lastName}
-                    </h5>
+                    <Link to={el?.novel?.author?.id? `/author/${el?.novel?.author?.id}` : `/novel/search?translator=${el?.translator?.id}`}>
+                      <h5 className="truncate font-light ">
+                        {el?.novel?.author?.name
+                          ? el?.novel?.author?.name
+                          : el?.translator?.firstName +
+                            ' ' +
+                            el?.translator?.lastName}
+                      </h5>
+                    </Link>
                   </th>
                   <th className="md:col-span-1  col-span-2  ">
                     <h5 className="font-light text-end">

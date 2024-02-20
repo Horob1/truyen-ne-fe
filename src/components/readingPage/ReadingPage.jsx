@@ -189,6 +189,45 @@ export const ReadingPage = () => {
                 </li>
               </ul>
             </div>
+            <div className="md:hidden relative">
+                <div
+                  className="pb-2 absolute right-1 top-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsShowSetting(!isShowSetting);
+                  }}
+                >
+                  <IoSettingsOutline className="text-2xl rounded-full" />
+                </div>
+                <div className={`bg-be mb-2 dark:bg-gray-700 rounded-lg ${isShowSetting ? '' : 'hidden'} `}>
+                  <div className="p-8 grid grid-cols-3 gap-4">
+                    <span className="col-span-1">Theme:</span>
+                    <ToggleSwitch
+                      className="col-span-2"
+                      checked={switch1}
+                      label={!switch1 ? 'Light Mode' : 'Dark Mode'}
+                      onChange={() => {
+                        setSwitch1(!switch1);
+                        dispatch(
+                          changeThemeSetting({
+                            theme: !switch1 ? 'dark' : 'light',
+                          })
+                        );
+                      }}
+                    />
+
+                    <span className="col-span-1">Font Chữ:</span>
+                    <div className="col-span-2 p-2  rounded-lg border-2">
+                      <FontCombobox />
+                    </div>
+                    <span className="col-span-1">Cỡ chữ:</span>
+                    <div className="col-span-2 p-2  rounded-lg border-2">
+                      <TextSizeCombobox />
+                    </div>
+                  </div>
+                </div>
+            </div>
             <div className="hidden md:flex justify-between px-4">
               <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>
                 <button
@@ -280,7 +319,7 @@ export const ReadingPage = () => {
                 <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>
                   <button
                     disabled={chapter.number === 1}
-                    className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                    className="w-full flex text-xl xs:py-4 justify-center items-center border-[1px] border-gray-300"
                   >
                     <FaLongArrowAltLeft className="mr-2" />
                     <span> Chương Trước</span>
@@ -289,7 +328,7 @@ export const ReadingPage = () => {
                 <Link to={`/novel/${novel.slug}/chuong-${chapter.number + 1}`}>
                   <button
                     disabled={novel.progress === chapter.number}
-                    className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                    className="w-full flex text-xl mt-4 md:mt-0 xs:py-4 justify-center items-center border-[1px] border-gray-300"
                   >
                     <span> Chương Sau</span>
                     <FaLongArrowAltRight className="ml-2" />

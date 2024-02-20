@@ -75,15 +75,15 @@ export const InforPage = () => {
       </div>
       <div className="flex mt-[10px] z-10 ">
         <div className="m-auto  bg-be md:rounded-xl  md:max-w-[1000px] lg:max-w-[1280px]  max-w-[98%] w-full md:-translate-y-20  shadow-md">
-          <div className="flex p-6 ">
+          <div className="xs:flex p-6 ">
             <div>
               <img
                 src={novel.photo ? novel.photo : img}
                 alt=""
-                className="w-[210px] h-[280px] shadow-lg hover:opacity-90"
+                className="m-auto xs:m-0 md:w-[210px] md:h-[280px] shadow-lg hover:opacity-90"
               />
             </div>
-            <div className="pl-6 w-full overflow-hidden">
+            <div className="pl-6 w-full overflow-hidden pt-4 xs:pt-0">
               <h2 className="truncate text-2xl font-medium text-gray-700 drop-shadow-xl hover:text-yellow-700">
                 {novel.name}
               </h2>
@@ -95,18 +95,24 @@ export const InforPage = () => {
                     </button>
                   </Link>
                 )}
-              <Link to={novel?.status==="Chưa hoàn thành"? '/novel/search?status=0': '/novel/search?status=1'}>
-                <button className="py-1 px-2 rounded-3xl border-[1px] border-green-500 text-green-500 mr-2">
-                  {novel?.status}
-                </button>
-              </Link>
-              <Link to={`/novel/search?category=${novel?.categories?.id}`}>
-                <button className="py-1 px-2 rounded-3xl border-[1px] border-yellow-500 text-yellow-500 mr-2">
-                  {novel?.categories?.name
-                    ? novel?.categories?.name
-                    : 'Chưa biết'}
-                </button>
-              </Link>
+                <Link
+                  to={
+                    novel?.status === 'Chưa hoàn thành'
+                      ? '/novel/search?status=0'
+                      : '/novel/search?status=1'
+                  }
+                >
+                  <button className="py-1 px-2 rounded-3xl border-[1px] border-green-500 text-green-500 mr-2">
+                    {novel?.status}
+                  </button>
+                </Link>
+                <Link to={`/novel/search?category=${novel?.categories?.id}`}>
+                  <button className="py-1 px-2 rounded-3xl border-[1px] border-yellow-500 text-yellow-500 mr-2">
+                    {novel?.categories?.name
+                      ? novel?.categories?.name
+                      : 'Chưa biết'}
+                  </button>
+                </Link>
               </div>
               <div className="hidden sm:flex">
                 <div>
@@ -119,14 +125,14 @@ export const InforPage = () => {
                 </div>
               </div>
               <div className="flex items-center py-4">
-                <div className="flex mr-5">
+                <div className="flex mr-5 overflow-hidden">
                   {[1, 2, 3, 4, 5].map((el) => {
                     if (novel.rateAvg >= el)
                       return <FaStar key={el} className="text-yellow-400" />;
                     else return <FaStar key={el} />;
                   })}
                 </div>
-                <span>
+                <span className="truncate">
                   {`${Math.round(novel.rateAvg * 10) / 10}/5 điểm (${
                     novel.reviewsQuan
                   } lượt đáng giá)`}{' '}

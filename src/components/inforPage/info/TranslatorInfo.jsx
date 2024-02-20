@@ -70,7 +70,7 @@ export const TranslatorInfo = (props) => {
             : 'Tác giả'}
         </h5>
       </div>
-      <div className="pt-6 h-[500px] sm:h-[550px] md:h-[400px] flex ">
+      <div className="pt-6 hidden xs:flex xs:h-[450px] sm:h-[550px] md:h-[400px] ">
         <Carousel theme={customTheme}>
           {list.map((el) => (
             <img
