@@ -16,7 +16,7 @@ export const UpdateUser = () => {
   const navigate = useNavigate();
   const handleUpdateUser = async () => {
     try {
-      const res = updateUser(param.uId, selectedRole);
+      const res = await updateUser(param.uId, selectedRole);
       toast.success('🦄 Thành công!', {
         position: 'top-right',
         autoClose: 5000,

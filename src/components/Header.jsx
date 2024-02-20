@@ -121,7 +121,12 @@ const Header = () => {
                 } absolute top-full w-[200px] rounded-xl shadow-2xl bg-white z-20`}
               >
                 <ul className="text-gray-700">
-                  <li className="pl-3 hover:bg-yellow-50 rounded-t-xl">
+                  <li
+                    className="pl-3 hover:bg-yellow-50 rounded-t-xl"
+                    onClick={() => {
+                      setIsShowUserMenu(!isShowUserMenu);
+                    }}
+                  >
                     <Link to="/user/profile">
                       <span className="flex items-center">
                         <CgProfile className="mr-2 text-gray-500"></CgProfile>{' '}
@@ -129,7 +134,12 @@ const Header = () => {
                       </span>
                     </Link>
                   </li>
-                  <li className="pl-3 hover:bg-yellow-50 ">
+                  <li
+                    className="pl-3 hover:bg-yellow-50 "
+                    onClick={() => {
+                      setIsShowUserMenu(!isShowUserMenu);
+                    }}
+                  >
                     <Link to="/user/my-collection">
                       <span className="flex items-center">
                         <MdOutlineCollections className="mr-2 text-gray-500"></MdOutlineCollections>{' '}
@@ -164,6 +174,8 @@ const Header = () => {
           <div className="relative py-[12px]">
             <form onSubmit={handleSubmit}>
               <input
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
                 type="text"
                 name=""
                 id=""
@@ -192,12 +204,22 @@ const Header = () => {
             <>
               <li>
                 <Link to="/user/profile">
-                  <button className="btn btn-blue w-full">Hồ sơ</button>
+                  <button
+                    onClick={handleToggleMenu}
+                    className="btn btn-blue w-full"
+                  >
+                    Hồ sơ
+                  </button>
                 </Link>
               </li>
               <li>
-                <Link to="/user/profile">
-                  <button className="btn btn-blue w-full">Tủ truyện</button>
+                <Link to="/user/my-collection">
+                  <button
+                    onClick={handleToggleMenu}
+                    className="btn btn-blue w-full"
+                  >
+                    Tủ truyện
+                  </button>
                 </Link>
               </li>
               <li>

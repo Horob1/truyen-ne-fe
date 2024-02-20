@@ -38,7 +38,7 @@ export const ReadingPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [bookMark, setBookMark] = useState({});
   const [novel, setNovel] = useState({});
-  const [chapter, setChapter] = useState({});
+  const [chapter, setChapter] = useState('');
   const [isShowSetting, setIsShowSetting] = useState(false);
   const [switch1, setSwitch1] = useState(false);
   const toggleBookMarkBtn = async () => {
@@ -48,7 +48,7 @@ export const ReadingPage = () => {
     } catch (error) {}
   };
   const scrollToSection = () => {
-    const targetElement = document.getElementById("comment");
+    const targetElement = document.getElementById('comment');
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth' });
     }
@@ -90,7 +90,7 @@ export const ReadingPage = () => {
     fetchData();
     if (theme === 'dark') setSwitch1(true);
   }, [slug.nSlug, slug.cSlug]);
-  if (!chapter) return <NotFound />;
+
   if (isLoading)
     return (
       <div
@@ -107,201 +107,203 @@ export const ReadingPage = () => {
         </div>
       </div>
     );
-  return (
-    <div className={theme}>
-      <Header></Header>
-      <div className="w-full flex bg-be text-black dark:text-white dark:bg-black">
-        <div className="relative m-auto bg-read dark:bg-gray-700 rounded-xl  md:max-w-[1080px]  max-w-[98%] w-full my-6 md:p-12 p-4">
-          <div className="hidden md:flex absolute right-[-10px] top-0">
-            <ul className="fixed ">
-              <Link to={`/novel/${novel?.slug}`}>
-                <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 rounded-t-xl">
-                  <div className="py-4 px-8">
-                    <MdArrowBack className="text-2xl" />
+  if (chapter && !isLoading)
+    return (
+      <div className={theme}>
+        <Header></Header>
+        <div className="w-full flex bg-be text-black dark:text-white dark:bg-black">
+          <div className="relative m-auto bg-read dark:bg-gray-700 rounded-xl  md:max-w-[1080px]  max-w-[98%] w-full my-6 md:p-12 p-4">
+            <div className="hidden md:flex absolute right-[-10px] top-0">
+              <ul className="fixed ">
+                <Link to={`/novel/${novel?.slug}`}>
+                  <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 rounded-t-xl">
+                    <div className="py-4 px-8">
+                      <MdArrowBack className="text-2xl" />
+                    </div>
+                  </li>
+                </Link>
+                <li
+                  className={`relative block  border-b-2 border-gray-300 ${
+                    isShowSetting
+                      ? 'bg-white dark:bg-gray-400'
+                      : 'bg-read dark:bg-gray-700 '
+                  }`}
+                >
+                  <div
+                    className="py-4 px-8"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setIsShowSetting(!isShowSetting);
+                    }}
+                  >
+                    <IoSettingsOutline className="text-2xl " />
+                  </div>
+                  <div
+                    className={`absolute bg-white dark:bg-gray-400 right-full top-0 w-[500px] ${
+                      isShowSetting ? '' : 'hidden'
+                    } `}
+                  >
+                    <div className="p-8 grid grid-cols-3 gap-4">
+                      <span className="col-span-1">Theme:</span>
+                      <ToggleSwitch
+                        className="col-span-2"
+                        checked={switch1}
+                        label={!switch1 ? 'Light Mode' : 'Dark Mode'}
+                        onChange={() => {
+                          setSwitch1(!switch1);
+                          dispatch(
+                            changeThemeSetting({
+                              theme: !switch1 ? 'dark' : 'light',
+                            })
+                          );
+                        }}
+                      />
+
+                      <span className="col-span-1">Font Chữ:</span>
+                      <div className="col-span-2 p-2  rounded-lg border-2">
+                        <FontCombobox />
+                      </div>
+                      <span className="col-span-1">Cỡ chữ:</span>
+                      <div className="col-span-2 p-2  rounded-lg border-2">
+                        <TextSizeCombobox />
+                      </div>
+                    </div>
                   </div>
                 </li>
-              </Link>
-              <li
-                className={`relative block  border-b-2 border-gray-300 ${
-                  isShowSetting
-                    ? 'bg-white dark:bg-gray-400'
-                    : 'bg-read dark:bg-gray-700 '
-                }`}
-              >
-                <div
-                  className="py-4 px-8"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setIsShowSetting(!isShowSetting);
-                  }}
-                >
-                  <IoSettingsOutline className="text-2xl " />
-                </div>
-                <div
-                  className={`absolute bg-white dark:bg-gray-400 right-full top-0 w-[500px] ${
-                    isShowSetting ? '' : 'hidden'
-                  } `}
-                >
-                  <div className="p-8 grid grid-cols-3 gap-4">
-                    <span className="col-span-1">Theme:</span>
-                    <ToggleSwitch
-                      className="col-span-2"
-                      checked={switch1}
-                      label={!switch1 ? 'Light Mode' : 'Dark Mode'}
-                      onChange={() => {
-                        setSwitch1(!switch1);
-                        dispatch(
-                          changeThemeSetting({
-                            theme: !switch1 ? 'dark' : 'light',
-                          })
-                        );
-                      }}
-                    />
-
-                    <span className="col-span-1">Font Chữ:</span>
-                    <div className="col-span-2 p-2  rounded-lg border-2">
-                      <FontCombobox />
-                    </div>
-                    <span className="col-span-1">Cỡ chữ:</span>
-                    <div className="col-span-2 p-2  rounded-lg border-2">
-                      <TextSizeCombobox />
-                    </div>
+                <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 ">
+                  <div className="py-4 px-8">
+                    <button onClick={toggleBookMarkBtn}>
+                      {bookMark?.isLove ? (
+                        <FaBookmark className="text-2xl text-red-500 dark:text-red-700"></FaBookmark>
+                      ) : (
+                        <FaRegBookmark className="text-2xl" />
+                      )}
+                    </button>
                   </div>
-                </div>
-              </li>
-              <li className="block  bg-read dark:bg-gray-700  border-b-2 border-gray-300 ">
-                <div className="py-4 px-8">
-                  <button onClick={toggleBookMarkBtn}>
-                    {bookMark?.isLove ? (
-                      <FaBookmark className="text-2xl text-red-500 dark:text-red-700"></FaBookmark>
-                    ) : (
-                      <FaRegBookmark className="text-2xl" />
-                    )}
-                  </button>
-                </div>
-              </li>
-              <li className="block  bg-read dark:bg-gray-700  border-gray-300 rounded-b-xl">
+                </li>
+                <li className="block  bg-read dark:bg-gray-700  border-gray-300 rounded-b-xl">
                   <div className=" py-4 px-8" onClick={scrollToSection}>
                     <IoChatboxEllipsesOutline className="text-2xl" />
                   </div>
-              </li>
-            </ul>
-          </div>
-          <div className="hidden md:flex justify-between px-4">
-            <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>
-              <button
-                disabled={chapter.number === 1}
-                className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50"
-              >
-                <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
-                  <FaLongArrowAltLeft className="mr-2" />
-                  <span> Chương Trước</span>
-                </div>
-              </button>
-            </Link>
-            <Link to={`/novel/${novel.slug}/chuong-${chapter.number + 1}`}>
-              <button
-                disabled={novel.progress === chapter.number}
-                className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50"
-              >
-                <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
-                  Chương Sau
-                  <FaLongArrowAltRight className="ml-2" />
-                </div>
-              </button>
-            </Link>
-          </div>
-          <div className="md:pt-12">
-            <h1 className="md:text-3xl text-xl ">
-              {`Chương ${chapter.number || '...'}: ${chapter.name || '...'}`}
-            </h1>
-
-            <div className="md:flex hidden pt-6 ">
-              <div className="flex items-center">
-                <FiBook className="mr-1" />{' '}
-                <span className="text-base">{novel.name || '...'}</span>
-              </div>
-              <div className="flex items-center ml-6">
-                <FaPenToSquare className="mr-1" />{' '}
-                <span className="text-base">
-                  {chapter?.translator?.firstName
-                    ? chapter?.translator?.firstName +
-                      ' ' +
-                      chapter?.translator?.lastName
-                    : 'Dịch giả'}
-                </span>
-              </div>
-              <div className="flex items-center ml-6">
-                <TbTextSize className="mr-1" />
-                <span className="text-base">
-                  {chapter?.content?.toString().length || 0}
-                </span>
-              </div>
-              <div className="flex items-center ml-6">
-                <FaRegHeart className="mr-1" />{' '}
-                <span className="text-base">{chapter?.watch || 0}</span>
-              </div>
+                </li>
+              </ul>
             </div>
-            <div className="flex items-center mt-1">
-              <FaRegClock className="mr-1" />{' '}
-              <span className="text-base">
-                {moment(new Date(chapter?.createTime)).format('YYYY-MM-DD')}
-              </span>
-            </div>
-            <div
-              className={`pt-6 ${
-                size === 'sm' ? 'leading-7 font-normal ' : ''
-              } ${size === 'base' ? 'leading-9 font-normal' : ''} ${
-                size === 'xl' ? 'leading-9 font-normal' : ''
-              } ${size === '3xl' ? 'font-light' : ''} ${
-                size === '4xl' ? 'font-light' : ''
-              } text-${size}`}
-            >
-              <article
-                id="content"
-                dangerouslySetInnerHTML={{
-                  __html: chapter.content.replace(/<\/p>/g, '</p><br>'),
-                }}
-                className={`pb-32 font-${font}`}
-              ></article>
-              <div className="hidden">
-                <span className="font-sans">C</span>
-                <span className="font-patrick">H</span>
-                <span className="font-playfair">A</span>
-                <span className="font-protes">T</span>
-                <span className="font-roboto">E</span>
-                <span className="font-mono">R</span>
-              </div>
-              ===============
-            </div>
-            <div className="pt-8 md:pt-16 grid grid-cols-1 md:grid-cols-2">
+            <div className="hidden md:flex justify-between px-4">
               <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>
                 <button
                   disabled={chapter.number === 1}
-                  className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                  className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50"
                 >
-                  <FaLongArrowAltLeft className="mr-2" />
-                  <span> Chương Trước</span>
+                  <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
+                    <FaLongArrowAltLeft className="mr-2" />
+                    <span> Chương Trước</span>
+                  </div>
                 </button>
               </Link>
               <Link to={`/novel/${novel.slug}/chuong-${chapter.number + 1}`}>
                 <button
                   disabled={novel.progress === chapter.number}
-                  className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                  className="px-6 py-2 hover:opacity-75 rounded-[50px] bg-gray-400 disabled:opacity-50"
                 >
-                  <span> Chương Sau</span>
-                  <FaLongArrowAltRight className="ml-2" />
+                  <div className="w-[140px] justify-between flex items-center text-base font-medium text-white">
+                    Chương Sau
+                    <FaLongArrowAltRight className="ml-2" />
+                  </div>
                 </button>
               </Link>
             </div>
-            <div className="mt-8" id="comment">
-              <CommentList chapter={chapter.id} />
+            <div className="md:pt-12">
+              <h1 className="md:text-3xl text-xl ">
+                {`Chương ${chapter.number || '...'}: ${chapter.name || '...'}`}
+              </h1>
+
+              <div className="md:flex hidden pt-6 ">
+                <div className="flex items-center">
+                  <FiBook className="mr-1" />{' '}
+                  <span className="text-base">{novel.name || '...'}</span>
+                </div>
+                <div className="flex items-center ml-6">
+                  <FaPenToSquare className="mr-1" />{' '}
+                  <span className="text-base">
+                    {chapter?.translator?.firstName
+                      ? chapter?.translator?.firstName +
+                        ' ' +
+                        chapter?.translator?.lastName
+                      : 'Dịch giả'}
+                  </span>
+                </div>
+                <div className="flex items-center ml-6">
+                  <TbTextSize className="mr-1" />
+                  <span className="text-base">
+                    {chapter?.content?.toString().length || 0}
+                  </span>
+                </div>
+                <div className="flex items-center ml-6">
+                  <FaRegHeart className="mr-1" />{' '}
+                  <span className="text-base">{chapter?.watch || 0}</span>
+                </div>
+              </div>
+              <div className="flex items-center mt-1">
+                <FaRegClock className="mr-1" />{' '}
+                <span className="text-base">
+                  {moment(new Date(chapter?.createTime)).format('YYYY-MM-DD')}
+                </span>
+              </div>
+              <div
+                className={`pt-6 ${
+                  size === 'sm' ? 'leading-7 font-normal ' : ''
+                } ${size === 'base' ? 'leading-9 font-normal' : ''} ${
+                  size === 'xl' ? 'leading-9 font-normal' : ''
+                } ${size === '3xl' ? 'font-light' : ''} ${
+                  size === '4xl' ? 'font-light' : ''
+                } text-${size}`}
+              >
+                <article
+                  id="content"
+                  dangerouslySetInnerHTML={{
+                    __html: chapter.content.replace(/<\/p>/g, '</p><br>'),
+                  }}
+                  className={`pb-32 font-${font}`}
+                ></article>
+                <div className="hidden">
+                  <span className="font-sans">C</span>
+                  <span className="font-patrick">H</span>
+                  <span className="font-playfair">A</span>
+                  <span className="font-protes">T</span>
+                  <span className="font-roboto">E</span>
+                  <span className="font-mono">R</span>
+                </div>
+                ===============
+              </div>
+              <div className="pt-8 md:pt-16 grid grid-cols-1 md:grid-cols-2">
+                <Link to={`/novel/${novel.slug}/chuong-${chapter.number - 1}`}>
+                  <button
+                    disabled={chapter.number === 1}
+                    className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                  >
+                    <FaLongArrowAltLeft className="mr-2" />
+                    <span> Chương Trước</span>
+                  </button>
+                </Link>
+                <Link to={`/novel/${novel.slug}/chuong-${chapter.number + 1}`}>
+                  <button
+                    disabled={novel.progress === chapter.number}
+                    className="w-full flex text-xl py-4 justify-center items-center border-[1px] border-gray-300"
+                  >
+                    <span> Chương Sau</span>
+                    <FaLongArrowAltRight className="ml-2" />
+                  </button>
+                </Link>
+              </div>
+              <div className="mt-8" id="comment">
+                <CommentList chapter={chapter.id} />
+              </div>
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </div>
-      <Footer></Footer>
-    </div>
-  );
+    );
+  return <NotFound />;
 };
