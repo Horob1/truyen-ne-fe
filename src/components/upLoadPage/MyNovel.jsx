@@ -126,7 +126,7 @@ export const MyNovel = () => {
               </span>
             </div>
             <div className="pt-4 flex">
-              {novel.status==='Hoàn thành' && <Link to={`/up-load/my-novel/add-chapter/${novel.id}`}>
+              {novel.status === 'Chưa hoàn thành' && <Link to={`/up-load/my-novel/add-chapter/${novel.id}`}>
                 <button className="p-2 m-2 bg-be rounded-md">
                   <IoAddOutline className="text-gray-500" />
                 </button>
