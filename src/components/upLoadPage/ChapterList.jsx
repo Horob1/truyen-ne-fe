@@ -69,7 +69,7 @@ export const ChapterList = () => {
                       {moment(new Date(el.createTime)).format('YYYY-MM-DD')}
                     </h5>
                   </th>
-                  <th key={4} className="col-span-1">
+                  {novel.status ==="Chưa hoàn thành"  && <><th key={4} className="col-span-1">
                     <Link to={'/up-load/my-novel/update-chapter/' +param.nId+'/'+ el.id}>
                       <button>
                         <MdEditSquare className="text-green-600" />
@@ -80,7 +80,7 @@ export const ChapterList = () => {
                     <button onClick={(e) => setOpenModal(true)}>
                       <MdDelete className="text-red-600"></MdDelete>
                     </button>
-                  </th>
+                  </th></>}
                 </tr>
               ))}
             </tbody>
