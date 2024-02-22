@@ -29,14 +29,14 @@ export const MyCarousel = () => {
     },
   };
   return (
-    <div className="hidden md:h-80 sm:flex xl:h-96 2xl:h-120 ">
+    <div className="hidden md:h-80 sm:flex xl:h-96 2xl:h-120 w-full">
       <Carousel theme={customTheme} slideInterval={60000}>
         {list.map((el, index) => (
-         <a href={`/novel/${el.slug}`} key={index} className="h-[100%] block">  
+         <a href={`/novel/${el.slug}`} key={index} className="h-[100%] block w-full">  
           <img
             src={el?.coverImg ? el?.coverImg : test}
             alt="..."
-            className="h-[100%] "
+            className="h-[100%] w-full"
           />
         </a>
         ))}
