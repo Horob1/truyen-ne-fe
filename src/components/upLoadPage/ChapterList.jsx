@@ -39,11 +39,11 @@ export const ChapterList = () => {
     );
   return (
     <div className="mx-auto mt-[2%] w-[96%]  rounded-lg p-8">
-      <Link to={'/up-load/my-novel/add-chapter/' + param.nId}>
+      {novel.status ==="Chưa hoàn thành" && <Link to={'/up-load/my-novel/add-chapter/' + param.nId}>
         <button className="absolute p-6 bg-violet-600 bottom-10 right-10 rounded-full shadow-2xl shadow-violet-800 hover:">
           <IoMdAdd className="text-2xl text-white" />
         </button>
-      </Link>
+      </Link>}
       <h1 className="text-xl font-medium">Tên truyện: {novel.name}</h1>
       <small className="pb-4">Danh sách chương!</small>
       <div className="rounded-md mt-4 bg-white w-full p-4">
