@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getUserList } from '../../../services/api/admin/getUserList';
 import { MyPagination } from '../../MyPagination';
+import { deleteUser } from '../../../services/api/admin/deleteUser';
 
 export const SearchUser = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -11,9 +12,11 @@ export const SearchUser = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const res = await getUserList(
+      
+      const res = await getUserList( 
         `?firstName=${firstName}&lastName=${lastName}&fields=username,email,firstName,lastName,avatar&page=${currentPage}`
       );
+      
       setUserList(res.data || []);
     } catch (error) {
       setUserList([]);
@@ -23,8 +26,9 @@ export const SearchUser = () => {
     const fetchData = async () => {
       try {
         const res = await getUserList(
-          `?firstName=${firstName}&lastName=${lastName}&fields=username,email,firstName,lastName,avatar&page=${currentPage}`
+          `?fields=username,email,firstName,lastName,avatar&page=${currentPage}`
         );
+        console.log(res)
         setUserList(res.data || []);
       } catch (error) {
         setUserList([]);
@@ -32,6 +36,9 @@ export const SearchUser = () => {
     };
     fetchData();
   }, [currentPage]);
+  
+ 
+
   return (
     <div className="mx-auto mt-[2%] w-[96%] bg-white rounded-lg p-8">
       <form onSubmit={handleSearch}>
@@ -80,7 +87,6 @@ export const SearchUser = () => {
       </form>
 
       <div className="py-8">
-        <h1 className="text-3xl font-medium">{`Kết quả (${userList.length})`}</h1>
         <div className="grid grid-cols-3 gap-4 py-4">
           {userList.map((user) => (
             <div
@@ -111,7 +117,7 @@ export const SearchUser = () => {
                   Sửa
                 </Link>
                 <button className="px-8 py-1 bg-red-500 hover:opacity-90 text-white rounded-lg">
-                  Xoá
+                  Xóa
                 </button>
               </div>
             </div>

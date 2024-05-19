@@ -21,6 +21,7 @@ export const AuthorPage = () => {
         setIsLoading(true);
         const aRes = await getAuthor(param.aId);
         setAuthor(aRes?.data?.author);
+        console.log(author);
         document.title = aRes?.data?.author?.name;
         const res = await getNovel(`?author=${param.aId}&page=${currentPage}`);
         setNovel(res?.data?.novels);

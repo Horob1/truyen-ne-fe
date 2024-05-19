@@ -63,7 +63,7 @@ export const ReadingPage = () => {
           const res = await getNewChapterList(
             `?novel=${novelResponse?.data?.novels[0]?.id}&slug=${slug.cSlug}`
           );
-          const view = await upView(res?.data?.chapter[0]?.id);
+            const view = await upView(res?.data?.chapter[0]?.id);
           setChapter(res?.data?.chapter[0]);
           if (res?.data?.chapter[0]?.content) {
             document.title =

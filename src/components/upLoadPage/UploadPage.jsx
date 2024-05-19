@@ -15,7 +15,7 @@ export const UploadPage = () => {
     if (screen.width < 1280) {
       navigate('/');
     }
-    if (account.role === 'user' || !account.role) navigate('/');
+    if ( !account.role || account.role!= 'admin') navigate('/');
   });
   return (
     <div className="grid grid-cols-12">

@@ -13,7 +13,8 @@ import { MdOutlineCollections } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { doLogout } from '../redux/action/userAction';
 import { toast } from 'react-toastify';
-import { logout } from '../services/apiServices';
+import {  } from '../services/apiServices';
+import {logout} from '../services/apiServices';
 const Header = () => {
   const [search, setSearch] = useState('');
   const [isShowUserMenu, setIsShowUserMenu] = useState(false);
@@ -36,6 +37,7 @@ const Header = () => {
         theme: 'light',
       });
     } catch (error) {
+      console.log(error);
       toast.error('Xin thử lại sau💕', {
         position: 'top-right',
         autoClose: 5000,

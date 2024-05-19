@@ -179,7 +179,7 @@ export const MyNovel = () => {
       <>
         <Modal show={openModal1} onClose={() => setOpenModal1(false)}>
           <Modal.Header className="bg-green-400">
-            <span className="text-white">Xoá truyện {deleteNovel.name}</span>
+            <span className="text-white">Cập nhật {deleteNovel.name}</span>
           </Modal.Header>
 
           <Modal.Body>

@@ -67,7 +67,7 @@ export const UpdateUser = () => {
     );
   return (
     <div
-      className={`bg-[url('/src/assets/admin.webp')] w-full h-screen bg-no-repeat bg-cover`}
+      className={`bg-[url('/src/assets/back.avif')] w-full h-screen bg-no-repeat bg-cover`}
     >
       <div className=" mt-8 ml-8 rounded-lg bg-white p-8 w-[50%]">
         <form>

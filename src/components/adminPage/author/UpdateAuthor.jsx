@@ -9,6 +9,7 @@ import {
 import moment from 'moment';
 
 export const UpdateAuthor = () => {
+  
   const [openModal, setOpenModal] = useState(false);
   const param = useParams();
   const [author, setAuthor] = useState({});
@@ -79,10 +80,10 @@ export const UpdateAuthor = () => {
             {'Tên tác giả: ' + author.name + ' 💕'}
           </h2>
           <small className="text-gray-600">
-            {moment(new Date(author.birthday)).format('YYYY-MM-DD')}
+            {/* {moment(author.birthday ? new Date(author.birthday) : '2000-01-01').format('YYYY-MM-DD')} */}
           </small>
           <h2 className="text-xl font-normal overflow-hidden line-clamp-2">
-            {'Mô tả: ' + author.description}
+            {'Mô tả: ' + (author.description ? author.description : '')}
           </h2>
         </div>
         <div className="p-8">
@@ -118,7 +119,7 @@ export const UpdateAuthor = () => {
         <div className="px-8">
           <span className="font-medium">Ngày sinh</span>
           <Datepicker
-            defaultDate={new Date(author.birthday)}
+            // defaultDate={new Date(author.birthday) }
             className="pt-2"
             onSelectedDateChanged={setBirthday}
           />

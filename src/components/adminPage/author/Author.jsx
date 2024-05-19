@@ -3,7 +3,7 @@ import { IoMdAdd } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { MyPagination } from '../../MyPagination';
 import removeAccents from '../../../utils/removeAccents';
-import { getAuthor } from '../../../services/api/admin/author';
+import { getAllAuthor, getAuthor } from '../../../services/api/admin/author';
 
 export const Author = () => {
   const [authorList, setAuthorList] = useState([]);
@@ -12,13 +12,10 @@ export const Author = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (slug) {
-          const q = { slug: { $regex: slug } };
-          const res = await getAuthor(
-            `?q=${JSON.stringify(q)}&page=${currentPage}`
-          );
-          setAuthorList(res?.data?.author || []);
-        }
+
+        const res = await getAuthor(`?page=${currentPage}`);
+        console.log(res.data);
+        setAuthorList(res?.data?.author || []);
       } catch (error) {
         setAuthorList([]);
       }
@@ -40,7 +37,7 @@ export const Author = () => {
   return (
     <div className="mx-auto mt-[2%] w-[96%] bg-white rounded-lg p-8">
       <Link to={'/admin/author/add-new'}>
-        <button className="absolute p-6 bg-red-600 bottom-10 right-10 rounded-full shadow-2xl shadow-red-800 hover:">
+        <button className="fixed p-6 bg-red-600 bottom-10 right-10 rounded-full shadow-2xl shadow-red-800 hover:">
           <IoMdAdd className="text-2xl text-white" />
         </button>
       </Link>
@@ -76,7 +73,6 @@ export const Author = () => {
       </form>
 
       <div className="py-8">
-        <h1 className="text-3xl font-medium">{`Kết quả (${authorList.length})`}</h1>
         <div className="grid grid-cols-1 gap-4 py-4">
           {authorList.map((author) => (
             <div
@@ -96,7 +92,7 @@ export const Author = () => {
                   to={'/admin/author/' + author.id}
                   className="px-8 py-1 bg-yellow-400 hover:opacity-90 text-white rounded-lg mb-2"
                 >
-                  Sửa
+                  Sửa 
                 </Link>
                 <button className="px-8 py-1 bg-red-500 hover:opacity-90 text-white rounded-lg">
                   Xoá
